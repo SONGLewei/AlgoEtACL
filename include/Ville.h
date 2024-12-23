@@ -13,4 +13,4 @@ class Ville {
   public:
     Ville(string nom, double latitude, double longitue);
     double distance(Ville v);
-}
+};
