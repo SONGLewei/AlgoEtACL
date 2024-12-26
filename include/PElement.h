@@ -1,31 +1,70 @@
 #pragma once
 
+#include <iostream>
+
 template <class T>
 class PElement {
   public:
-    T v;
-    PElement * suivant;
+    T* valeur;
+    PElement<T>* suivant;
 
-    PElement(const T& valeur, PElement* suivant = nullptr) : v(valeur), suivant(suivant) {}
+    PElement(T* valeur, PElement<T>* suivant = nullptr) 
+        : valeur(valeur), suivant(suivant) {}
 
     ~PElement() {
-      delete suivant;
+        if (valeur) {
+        delete valeur;
+        valeur = nullptr;
+      }
+      suivant = nullptr; //
     }
 
-    static int taille(PElement* liste) {
-      int taille = 0;
-      while (liste) {
-        taille++;
-        liste = liste->suivant;
-      }
-      return taille;
+    static PElement<T>* ajouter(PElement<T>* liste, T* valeur) {
+        return new PElement<T>(valeur, liste);
     }
 
-    static void detruire(PElement* liste) {
-      while (liste) {
-        PElement* temp = liste;
-        liste = liste->suivant;
-        delete temp;
+    static PElement<T>* retirer(PElement<T>* liste, T* valeur) {
+    PElement<T>* prev = nullptr;
+    PElement<T>* curr = liste;
+      while (curr) {
+          if (curr->valeur == valeur) {
+              if (prev) {
+                  prev->suivant = curr->suivant;
+              } else {
+                  liste = curr->suivant;
+              }
+              curr->suivant = nullptr;
+              delete curr;
+              break;
+          }
+          prev = curr;
+          curr = curr->suivant;
       }
+      return liste;
     }
+
+    static void afficher(const PElement<T>* liste) {
+        while (liste) {
+            std::cout << *(liste->valeur) << " -> ";
+            liste = liste->suivant;
+        }
+        std::cout << "nullptr" << std::endl;
+    }
+
+    // 静态方法：计算链表长度
+    static int longueur(const PElement<T>* liste) {
+        int count = 0;
+        while (liste) {
+            count++;
+            liste = liste->suivant;
+        }
+        return count;
+    }
+
+
+    static PElement<T>* copier(const PElement<T>* liste) {
+    if (!liste) return nullptr;
+    return new PElement<T>(new T(*(liste->valeur)), copier(liste->suivant));
+    }
+
 };

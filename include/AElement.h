@@ -5,10 +5,9 @@
 using namespace std;
 
 class AElement {
-  private:
-    int clef;
+  public://Pour simplier le projet on peut mettre comme public
+    int clef;//Pour stocker une seul cle
 
-  public:
     AElement(int clef) : clef(clef) {};
     
     operator string() const {

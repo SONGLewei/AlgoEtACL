@@ -7,10 +7,9 @@ using namespace std;
 
 template <class T>
 class Sommet : public GElement<T> {
-  private:
+  public:
     int degre;
 
-  public:
     Sommet(int clef, T v) : GElement<T>(clef, v), degre(0) {}
 
     void augmenterDegre() {

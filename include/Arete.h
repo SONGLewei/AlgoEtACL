@@ -7,19 +7,22 @@ using namespace std;
 
 template <class S, class T>
 class Arete : public GElement<S> {
-  private:
+  public:
     Sommet<T> * debut;
     Sommet<T> * fin;
 
-  public:
     Arete(int clef, S v, Sommet<T> * debut, Sommet<T> * fin) : GElement<S>(clef, v),debut(debut), fin(fin) {
       debut->augmenterDegre();
       fin->augmenterDegre();
     }
 
     ~Arete() {
-      debut->diminuerDegre();
-      fin->diminuerDegre();
+      if (debut) {
+        debut->diminuerDegre();
+    }
+    if (fin) {
+        fin->diminuerDegre();
+    }
     }
 
     bool estEgal(Sommet<T> * s1, Sommet<T> * s2) {

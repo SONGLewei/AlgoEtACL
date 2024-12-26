@@ -3,121 +3,139 @@
 #include "PElement.h"
 #include "Sommet.h"
 #include "Arete.h"
-
-using namespace std;
+#include <string>
+#include <sstream>
 
 template <class S, class T>
 class Graphe {
-  private:
-    PElement<Sommet<T>>* lSommets;
-    PElement<Arete<S,T>>* lAretes;
-
-    Sommet<T>* getSommetParClef(int clef) const {
-      for (PElement<Sommet<T>>* p = lSommets; p; p = p->suivant) {
-        if (p->v->clef == clef) {
-          return p->v;
-        }
-      }
-      return nullptr;
-    }
-
   public:
-    Graphe() : lSommets(nullptr), lAretes(nullptr) {}
+    PElement<Sommet<T>>* lSommets;
+    PElement<Arete<S, T>>* lAretes;
+    int prochaineClef;
 
-    Graphe(const Graphe<S, T>& graphe) : lSommets(nullptr), lAretes(nullptr) {
-      for (PElement<Sommet<T>>* p = graphe.lSommets; p; p = p->suivant) {
-        creerSommet(p->v->info);
-      }
-      for (PElement<Arete<S, T>>* p = graphe.lAretes; p; p = p->suivant) {
-        creerArete(p->v->info, getSommetParClef(p->v->debut->clef), getSommetParClef(p->v->fin->clef));
-      }
+    void libererListeSommets() {
+        while (lSommets) {
+            PElement<Sommet<T>>* temp = lSommets->suivant;
+            delete lSommets;
+            lSommets = temp;
+        }
     }
+
+    void libererListeAretes() {
+        while (lAretes) {
+            PElement<Arete<S, T>>* temp = lAretes->suivant;
+            delete lAretes;
+            lAretes = temp;
+        }
+    }
+
+    Graphe() : lSommets(nullptr), lAretes(nullptr), prochaineClef(0) {}
+
+    Graphe(const Graphe<S, T>& other) 
+        : lSommets(PElement<Sommet<T>>::copier(other.lSommets)),
+          lAretes(PElement<Arete<S, T>>::copier(other.lAretes)),
+          prochaineClef(other.prochaineClef) {}
 
     ~Graphe() {
-      delete lSommets;
-      delete lAretes;
+        libererListeSommets();
+        libererListeAretes();
     }
 
-    int nombreSommets() {
-      return PElement<Sommet<T>>::taille(lSommets);
-    }
-
-    int nombreAretes() {
-      return PElement<Arete<S,T>>::taille(lAretes);
-    }
-
-    Sommet<T> * creerSommet(const T& info) {
-      Sommet<T> * sommet = new Sommet<T>(nombreSommets(), info);
-      lSommets = new PElement<Sommet<T>>(sommet, lSommets);
-      return sommet;
-    }
-
-    Arete<S,T> * creerArete(const S& info, Sommet<T> * debut, Sommet<T> * fin) {
-      Arete<S,T> * arete = new Arete<S,T>(nombreAretes(), info, debut, fin);
-      lAretes = new PElement<Arete<S,T>>(arete, lAretes);
-      return arete;
-    }
-
-    PElement<pair<Sommet<T>*, Arete<S,T>*>>* adjacences(const Sommet<T> * sommet) const {
-      PElement<pair<Sommet<T>*, Arete<S, T>> >* adj = nullptr;
-      for (PElement<Arete<S, T>>* p = lAretes; p; p = p->suivant) {
-        if (p->v->debut == sommet) {
-          adj = new PElement<pair<Sommet<T>*, Arete<S, T>>>(make_pair(p->v->fin, p->v), adj);
-        } else if (p->v->fin == sommet) {
-          adj = new PElement<pair<Sommet<T>*, Arete<S, T>>>(make_pair(p->v->debut, p->v), adj);
+    Graphe<S, T>& operator=(const Graphe<S, T>& other) {
+        if (this != &other) {
+            libererListeSommets();
+            libererListeAretes();
+            lSommets = PElement<Sommet<T>>::copier(other.lSommets);
+            lAretes = PElement<Arete<S, T>>::copier(other.lAretes);
+            prochaineClef = other.prochaineClef;
         }
-      }
-      return adj;
+        return *this;
     }
 
-    PElement<Arete<S,T>> * aretesAdjacentes(Sommet<T> * s) {
-      PElement<Arete<S, T>>* adj = nullptr;
-      for (PElement<Arete<S, T>>* p = lAretes; p; p = p->suivant) {
-        if (p->v->debut == s || p->v->fin == s) {
-          adj = new PElement<Arete<S, T>>(p->v, adj);
+    Sommet<T>* creeSommet(const T& info) {
+        Sommet<T>* nouveauSommet = new Sommet<T>(prochaineClef++, info);
+        lSommets = PElement<Sommet<T>>::ajouter(lSommets, nouveauSommet);
+        return nouveauSommet;
+    }
+
+    void supprimerSommet(Sommet<T>* sommet) {
+        PElement<Arete<S, T>>* it = lAretes;
+        while (it) {
+            Arete<S, T>* currentArete = it->valeur;
+            it = it->suivant;
+            if (currentArete->debut == sommet || currentArete->fin == sommet) {
+                lAretes = PElement<Arete<S, T>>::retirer(lAretes, currentArete);
+            }
         }
-      }
-      return adj;
+        lSommets = PElement<Sommet<T>>::retirer(lSommets, sommet);
     }
 
-    PElement<Sommet<T>> * voisins(Sommet<T> * s) {
-      PElement<Sommet<T>>* voisins = nullptr;
-      for (PElement<pair<Sommet<T>*, Arete<S, T>> >* p = adjacences(s); p; p = p->s) {
-        voisins = new PElement<Sommet<T>>(p->v, voisins);
-      }
-      return voisins;
+    Arete<S, T>* creeArete(const S& info, Sommet<T>* debut, Sommet<T>* fin) {
+        Arete<S, T>* nouvelleArete = new Arete<S, T>(prochaineClef++, info, debut, fin);
+        lAretes = PElement<Arete<S, T>>::ajouter(lAretes, nouvelleArete);
+        return nouvelleArete;
     }
 
-    Arete<S,T> * getAreteParSommets(Sommet<S> * s1, Sommet<S> * s2) {
-      for (PElement<Arete<S, T>>* p = lAretes; p; p = p->suivant) {
-        if (p->v->estEgal(s1, s2)) {
-          return p->v;
+    void supprimerArete(Arete<S, T>* arete) {
+        lAretes = PElement<Arete<S, T>>::retirer(lAretes, arete);
+    }
+
+    int nombreSommets() const {
+        return PElement<Sommet<T>>::longueur(lSommets);
+    }
+
+    int nombreAretes() const {
+        return PElement<Arete<S, T>>::longueur(lAretes);
+    }
+
+    PElement<Arete<S, T>>* aretesAdjacentes(const Sommet<T>* sommet) const {
+        PElement<Arete<S, T>>* resultat = nullptr;
+        for (PElement<Arete<S, T>>* it = lAretes; it; it = it->suivant) {
+            if (it->valeur->debut == sommet || it->valeur->fin == sommet) {
+                resultat = PElement<Arete<S, T>>::ajouter(resultat, it->valeur);
+            }
         }
-      }
-      return nullptr;
+        return resultat;
     }
 
-    operator string() const {
-      return "Graphe: " + to_string(nombreSommets()) + " sommets, " + to_string(nombreAretes()) + " aretes";
-    }
-
-    friend ostream& operator<<(ostream& os, const Graphe<S, T>& graphe) {
-      return os << string(graphe);
-    }
-
-    const Graphe<S, T>& operator=(const Graphe<S, T>& graphe) {
-      if (this != &graphe) {
-        delete lSommets;
-        delete lAretes;
-        lSommets = nullptr;
-        lAretes = nullptr;
-        for (PElement<Sommet<T>>* p = graphe.lSommets; p; p = p->suivant) {
-          creerSommet(p->v->info);
+    PElement<Sommet<T>>* voisins(const Sommet<T>* sommet) const {
+        PElement<Sommet<T>>* resultat = nullptr;
+        for (PElement<Arete<S, T>>* it = lAretes; it; it = it->suivant) {
+            if (it->valeur->debut == sommet) {
+                resultat = PElement<Sommet<T>>::ajouter(resultat, it->valeur->fin);
+            } else if (it->valeur->fin == sommet) {
+                resultat = PElement<Sommet<T>>::ajouter(resultat, it->valeur->debut);
+            }
         }
-        for (PElement<Arete<S, T>>* p = graphe.lAretes; p; p = p->suivant) {
-          creerArete(p->v->info, getSommetParClef(p->v->debut->clef), getSommetParClef(p->v->fin->clef));
+        return resultat;
+    }
+
+    Arete<S, T>* getAreteParSommets(const Sommet<T>* s1, const Sommet<T>* s2) const {
+        for (PElement<Arete<S, T>>* it = lAretes; it; it = it->suivant) {
+            if (it->valeur->estEgal(const_cast<Sommet<T>*>(s1), const_cast<Sommet<T>*>(s2))) {
+                return it->valeur;
+            }
         }
-      }
-      return *this;
+        return nullptr;
+    }
+
+    std::string toString() const {
+        std::ostringstream oss;
+
+        oss << "Sommets:\n";
+        for (PElement<Sommet<T>>* it = lSommets; it; it = it->suivant) {
+            oss << "  " << *(it->valeur) << "\n";
+        }
+
+        oss << "Aretes:\n";
+        for (PElement<Arete<S, T>>* it = lAretes; it; it = it->suivant) {
+            oss << "  " << *(it->valeur) << "\n";
+        }
+
+        return oss.str();
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const Graphe<S, T>& graphe) {
+        return os << graphe.toString();
     }
 };

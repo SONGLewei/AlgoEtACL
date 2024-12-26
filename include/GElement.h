@@ -4,11 +4,13 @@
 #include "AElement.h"
 
 using namespace std;
-
+//Pour avoir plusieur type de T(entree peut etre int ou string)
 template <class T>
 class GElement : public AElement {
-  private:
+  public:
     T v;
+
+    GElement(int clef, T v) : AElement(clef), v(v) {};
 
     string valueToString() const {
       if constexpr (is_same<T, string>::value) {
@@ -17,9 +19,6 @@ class GElement : public AElement {
         return to_string(v);
       }
     }
-
-  public:
-    GElement(int clef, T v) : AElement(clef), v(v) {};
     
     operator string() const {
       return "GElement: " + AElement::operator string() + ", Value: " + valueToString();

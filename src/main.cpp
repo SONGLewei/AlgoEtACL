@@ -8,7 +8,7 @@ L'info associée aux arêtes est un char     (par exemple)
 */
 #include <iostream>
 #include <string>
-#include <Graphe.h>
+#include "../include/Graphe.h"
 
 using namespace std;
 
