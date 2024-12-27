@@ -6,6 +6,8 @@ ODIR = obj
 SDIR = src
 # Binary folder
 BDIR = bin
+# Test folder
+TDIR = test
 
 # ++
 # ! vide si language c
@@ -25,14 +27,17 @@ CFLAGS = -g -std=$(language)17 -I$(IDIR)
 # le programme final
 PROG = out
 
-_DEP = AElement.h GElement.h PElement.h Arete.h Sommet.h Graphe.h Ville.h
+_DEP = AElement.h GElement.h PElement.h Arete.h Sommet.h Graphe.h Ville.h JSONLoader.h json.hpp GrapheAll.h GrapheExporter.h
 DEP = $(patsubst %,$(IDIR)/%,$(_DEP))
 
-_OBJ = main.o
+_OBJ = testGrapheExporter.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
+# _OBJ = main.o
+# OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+
 # Toutes les étiquettes qui ne sont pas des fichiers sont déclarées ici
-.PHONY: run all remake clean delete
+.PHONY: run all test remake clean delete
 
 all : $(PROG)
 
@@ -51,8 +56,14 @@ $(PROG) : $(OBJ)
 # (+) le fichier source : $(SDIR)/%.c où
 #				% désigne le nom de la cible sans le suffixe .o
 #			qui se situe dans le répertoire $(ODIR)
-$(ODIR)/%.o : $(SDIR)/%.cpp $(DEP)
+# $(ODIR)/%.o : $(SDIR)/%.cpp $(DEP)
+# 	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(ODIR)/%.o : $(TDIR)/%.cpp $(DEP)
 	$(CC) $(CFLAGS) -c -o $@ $<
+
+# Remake
+remake : delete all
 
 # les cibles de nettoyage
 clean :

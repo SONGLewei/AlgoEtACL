@@ -21,18 +21,18 @@ int main() {
   Sommet<string> * s0, *s1, *s2, *s3;
 
   //------------------ on insère des nouveaux sommets isolés --------------------
-  s0 = g1.creerSommet("King's Landing");
-  s1 = g1.creerSommet("Winterfell");
-  s2 = g1.creerSommet("DragonStone");
-  s3 = g1.creerSommet("The wall");
+  s0 = g1.creeSommet("King's Landing");
+  s1 = g1.creeSommet("Winterfell");
+  s2 = g1.creeSommet("DragonStone");
+  s3 = g1.creeSommet("The wall");
 
   //----------------- on connecte certains sommets -------------------
   Arete<char,string> * a0, * a1, *a2, *a3;
 
-  a0 = g1.creerArete('a',s1,s0);
-  a1 = g1.creerArete('b',s2,s1);
-  a2 = g1.creerArete('c',s3,s2);
-  a3 = g1.creerArete('d',s3,s1);
+  a0 = g1.creeArete('a',s1,s0);
+  a1 = g1.creeArete('b',s2,s1);
+  a2 = g1.creeArete('c',s3,s2);
+  a3 = g1.creeArete('d',s3,s1);
 
   //------------------ faire le dessin du graphe sur papier en notant les noms et les degrés pour comprendre la suite ----------------
   cout <<"le graphe créé g1 est :" << endl << g1 << endl; cin >> ch;

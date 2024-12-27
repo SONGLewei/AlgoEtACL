@@ -1,9 +1,9 @@
 #include <iostream>
 #include "../include/GrapheAll.h"
 
-int main(){
+int main() {
     JSONLoader loader;
-    auto graphe = loader.chargerGrapheFromJSON("../13_fichiers_JSON/GrandEst.json");
+    auto graphe = loader.chargerGrapheFromJSON("./13_fichiers_JSON/GrandEst.json");
     std::cout << "=== Graph Loaded from JSON ===\n";
     std::cout << "Number of Villes: " << graphe.nombreSommets() << "\n";
     std::cout << "Number of aretes: "    << graphe.nombreAretes()  << "\n";
@@ -25,6 +25,7 @@ int main(){
         double dist = arete->v;
         std::cout << s1 << " <--> " << s2 << " : " << dist << " km\n";
     }
+
     GrapheExporter::exporter(graphe,"Graphe_complet.json");
     std::cout<<"Exporter fini. ";
     return 0;
