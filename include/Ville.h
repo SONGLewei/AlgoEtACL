@@ -5,12 +5,12 @@
 using namespace std;
 
 class Ville {
-  private:
-    string nom;
+  public:
+    string name;
     double latitude;
     double longitude;
 
-  public:
-    Ville(string nom, double latitude, double longitue);
-    double distance(Ville v);
+    Ville(): name(""),latitude(0.0),longitude(0.0){}
+    Ville(const string& n,double lat,double lon):
+      name(n),latitude(lat),longitude(lon){}
 };

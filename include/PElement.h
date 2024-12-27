@@ -16,7 +16,7 @@ class PElement {
         delete valeur;
         valeur = nullptr;
       }
-      suivant = nullptr; //
+      suivant = nullptr;
     }
 
     static PElement<T>* ajouter(PElement<T>* liste, T* valeur) {

@@ -1,0 +1,866 @@
+{
+  "noeuds": [
+    {
+      "ville": "Forbach",
+      "latitude": 49.19,
+      "longitude": 6.9
+    },
+    {
+      "ville": "Briey",
+      "latitude": 49.25,
+      "longitude": 5.93
+    },
+    {
+      "ville": "Bar-le-Duc",
+      "latitude": 48.77,
+      "longitude": 5.16
+    },
+    {
+      "ville": "Vesoul",
+      "latitude": 47.62,
+      "longitude": 6.15
+    },
+    {
+      "ville": "Verdun",
+      "latitude": 49.16,
+      "longitude": 5.38
+    },
+    {
+      "ville": "Saint-Di-des-Vosges",
+      "latitude": 48.28,
+      "longitude": 6.95
+    },
+    {
+      "ville": "Sarreguemines",
+      "latitude": 49.11,
+      "longitude": 7.07
+    },
+    {
+      "ville": "Sarrebourg",
+      "latitude": 48.73,
+      "longitude": 7.05
+    },
+    {
+      "ville": "Haguenau",
+      "latitude": 48.82,
+      "longitude": 7.78
+    },
+    {
+      "ville": "pinal",
+      "latitude": 48.18,
+      "longitude": 6.45
+    },
+    {
+      "ville": "Thionville",
+      "latitude": 49.36,
+      "longitude": 6.17
+    },
+    {
+      "ville": "Chlons-en-Champagne",
+      "latitude": 48.96,
+      "longitude": 4.36
+    },
+    {
+      "ville": "Charleville-Mzires",
+      "latitude": 49.77,
+      "longitude": 4.72
+    },
+    {
+      "ville": "Troyes",
+      "latitude": 48.3,
+      "longitude": 4.08
+    },
+    {
+      "ville": "Colmar",
+      "latitude": 48.08,
+      "longitude": 7.36
+    },
+    {
+      "ville": "Nancy",
+      "latitude": 48.69,
+      "longitude": 6.18
+    },
+    {
+      "ville": "Mulhouse",
+      "latitude": 47.75,
+      "longitude": 7.34
+    },
+    {
+      "ville": "Metz",
+      "latitude": 49.12,
+      "longitude": 6.17
+    },
+    {
+      "ville": "Reims",
+      "latitude": 49.26,
+      "longitude": 4.03
+    },
+    {
+      "ville": "Strasbourg",
+      "latitude": 48.58,
+      "longitude": 7.75
+    }
+  ],
+  "aretes": [
+    {
+      "de": "Briey",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Bar-le-Duc",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Bar-le-Duc",
+      "vers": "Briey"
+    },
+    {
+      "de": "Vesoul",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Vesoul",
+      "vers": "Briey"
+    },
+    {
+      "de": "Vesoul",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Verdun",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Verdun",
+      "vers": "Briey"
+    },
+    {
+      "de": "Verdun",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Verdun",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Saint-Di-des-Vosges",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Saint-Di-des-Vosges",
+      "vers": "Briey"
+    },
+    {
+      "de": "Saint-Di-des-Vosges",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Saint-Di-des-Vosges",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Saint-Di-des-Vosges",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Sarreguemines",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Sarreguemines",
+      "vers": "Briey"
+    },
+    {
+      "de": "Sarreguemines",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Sarreguemines",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Sarreguemines",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Sarreguemines",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Sarrebourg",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Sarrebourg",
+      "vers": "Briey"
+    },
+    {
+      "de": "Sarrebourg",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Sarrebourg",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Sarrebourg",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Sarrebourg",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Sarrebourg",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "Haguenau",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Haguenau",
+      "vers": "Briey"
+    },
+    {
+      "de": "Haguenau",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Haguenau",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Haguenau",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Haguenau",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Haguenau",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "Haguenau",
+      "vers": "Sarrebourg"
+    },
+    {
+      "de": "pinal",
+      "vers": "Forbach"
+    },
+    {
+      "de": "pinal",
+      "vers": "Briey"
+    },
+    {
+      "de": "pinal",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "pinal",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "pinal",
+      "vers": "Verdun"
+    },
+    {
+      "de": "pinal",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "pinal",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "pinal",
+      "vers": "Sarrebourg"
+    },
+    {
+      "de": "pinal",
+      "vers": "Haguenau"
+    },
+    {
+      "de": "Thionville",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Thionville",
+      "vers": "Briey"
+    },
+    {
+      "de": "Thionville",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Thionville",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Thionville",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Thionville",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Thionville",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "Thionville",
+      "vers": "Sarrebourg"
+    },
+    {
+      "de": "Thionville",
+      "vers": "Haguenau"
+    },
+    {
+      "de": "Thionville",
+      "vers": "pinal"
+    },
+    {
+      "de": "Chlons-en-Champagne",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Chlons-en-Champagne",
+      "vers": "Briey"
+    },
+    {
+      "de": "Chlons-en-Champagne",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Chlons-en-Champagne",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Chlons-en-Champagne",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Chlons-en-Champagne",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Chlons-en-Champagne",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "Chlons-en-Champagne",
+      "vers": "Sarrebourg"
+    },
+    {
+      "de": "Chlons-en-Champagne",
+      "vers": "Haguenau"
+    },
+    {
+      "de": "Chlons-en-Champagne",
+      "vers": "pinal"
+    },
+    {
+      "de": "Chlons-en-Champagne",
+      "vers": "Thionville"
+    },
+    {
+      "de": "Charleville-Mzires",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Charleville-Mzires",
+      "vers": "Briey"
+    },
+    {
+      "de": "Charleville-Mzires",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Charleville-Mzires",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Charleville-Mzires",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Charleville-Mzires",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Charleville-Mzires",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "Charleville-Mzires",
+      "vers": "Sarrebourg"
+    },
+    {
+      "de": "Charleville-Mzires",
+      "vers": "Haguenau"
+    },
+    {
+      "de": "Charleville-Mzires",
+      "vers": "pinal"
+    },
+    {
+      "de": "Charleville-Mzires",
+      "vers": "Thionville"
+    },
+    {
+      "de": "Charleville-Mzires",
+      "vers": "Chlons-en-Champagne"
+    },
+    {
+      "de": "Troyes",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Troyes",
+      "vers": "Briey"
+    },
+    {
+      "de": "Troyes",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Troyes",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Troyes",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Troyes",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Troyes",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "Troyes",
+      "vers": "Sarrebourg"
+    },
+    {
+      "de": "Troyes",
+      "vers": "Haguenau"
+    },
+    {
+      "de": "Troyes",
+      "vers": "pinal"
+    },
+    {
+      "de": "Troyes",
+      "vers": "Thionville"
+    },
+    {
+      "de": "Troyes",
+      "vers": "Chlons-en-Champagne"
+    },
+    {
+      "de": "Troyes",
+      "vers": "Charleville-Mzires"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Briey"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Sarrebourg"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Haguenau"
+    },
+    {
+      "de": "Colmar",
+      "vers": "pinal"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Thionville"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Chlons-en-Champagne"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Charleville-Mzires"
+    },
+    {
+      "de": "Colmar",
+      "vers": "Troyes"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Briey"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Sarrebourg"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Haguenau"
+    },
+    {
+      "de": "Nancy",
+      "vers": "pinal"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Thionville"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Chlons-en-Champagne"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Charleville-Mzires"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Troyes"
+    },
+    {
+      "de": "Nancy",
+      "vers": "Colmar"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Briey"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Sarrebourg"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Haguenau"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "pinal"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Thionville"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Chlons-en-Champagne"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Charleville-Mzires"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Troyes"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Colmar"
+    },
+    {
+      "de": "Mulhouse",
+      "vers": "Nancy"
+    },
+    {
+      "de": "Metz",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Metz",
+      "vers": "Briey"
+    },
+    {
+      "de": "Metz",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Metz",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Metz",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Metz",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Metz",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "Metz",
+      "vers": "Sarrebourg"
+    },
+    {
+      "de": "Metz",
+      "vers": "Haguenau"
+    },
+    {
+      "de": "Metz",
+      "vers": "pinal"
+    },
+    {
+      "de": "Metz",
+      "vers": "Thionville"
+    },
+    {
+      "de": "Metz",
+      "vers": "Chlons-en-Champagne"
+    },
+    {
+      "de": "Metz",
+      "vers": "Charleville-Mzires"
+    },
+    {
+      "de": "Metz",
+      "vers": "Troyes"
+    },
+    {
+      "de": "Metz",
+      "vers": "Colmar"
+    },
+    {
+      "de": "Metz",
+      "vers": "Nancy"
+    },
+    {
+      "de": "Metz",
+      "vers": "Mulhouse"
+    },
+    {
+      "de": "Reims",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Reims",
+      "vers": "Briey"
+    },
+    {
+      "de": "Reims",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Reims",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Reims",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Reims",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Reims",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "Reims",
+      "vers": "Sarrebourg"
+    },
+    {
+      "de": "Reims",
+      "vers": "Haguenau"
+    },
+    {
+      "de": "Reims",
+      "vers": "pinal"
+    },
+    {
+      "de": "Reims",
+      "vers": "Thionville"
+    },
+    {
+      "de": "Reims",
+      "vers": "Chlons-en-Champagne"
+    },
+    {
+      "de": "Reims",
+      "vers": "Charleville-Mzires"
+    },
+    {
+      "de": "Reims",
+      "vers": "Troyes"
+    },
+    {
+      "de": "Reims",
+      "vers": "Colmar"
+    },
+    {
+      "de": "Reims",
+      "vers": "Nancy"
+    },
+    {
+      "de": "Reims",
+      "vers": "Mulhouse"
+    },
+    {
+      "de": "Reims",
+      "vers": "Metz"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Forbach"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Briey"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Bar-le-Duc"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Vesoul"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Verdun"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Saint-Di-des-Vosges"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Sarreguemines"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Sarrebourg"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Haguenau"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "pinal"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Thionville"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Chlons-en-Champagne"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Charleville-Mzires"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Troyes"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Colmar"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Nancy"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Mulhouse"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Metz"
+    },
+    {
+      "de": "Strasbourg",
+      "vers": "Reims"
+    }
+  ]
+}
