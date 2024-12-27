@@ -1,12 +1,24 @@
-Chaque fois si vous utilisez un graphe
-Il faut d'abord charger le GrapheAll.h sur votre fichier .cpp. C'est tout.
+# Utilisation du Graphe
 
-Pour transmettre un fichier de JSON à Graphe: Definir:
-      JSONLoader loader;
-      auto graphe = loader.chargerGrapheFromJSON("ThePathOfYourJSON")
+Chaque fois que vous utilisez un graphe, il faut inclure `GrapheAll.h` dans votre fichier `.cpp`. C'est tout.
 
-L'inverse:
-      GrapheExporter::exporter(graphe,"TheNameYouWant.json");
+## Charger un fichier JSON en Graphe
 
-ATTENTION!!!
-      Les caractères tronqués dans le fichier JSON lors du chargement ne sont pas acceptés, veuillez donc supprimer les caractères tronqués dans le code à l'avance.
+Pour charger un fichier JSON en Graphe, définissez :
+
+```cpp
+JSONLoader loader;
+auto graphe = loader.chargerGrapheFromJSON("ThePathOfYourJSON");
+```
+
+## Exporter le Graphe en un fichier JSON
+
+Pour exporter le graphe en un fichier JSON, utilisez :
+
+```cpp
+GrapheExporter::exporter(graphe, "name.json");
+```
+
+# Attention
+
+Les caractères corrompus (mauvais encodage) dans le fichier JSON lors du chargement ne sont pas acceptés.
