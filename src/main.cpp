@@ -1,65 +1,49 @@
-/*
-
-Test des méthodes de base sur un graphe sauf les opérations de dessin
-
-L'info associée aux sommets est un string  (par exemple)
-L'info associée aux arêtes est un char     (par exemple)
-
-*/
 #include <iostream>
-#include <string>
-#include "../include/Graphe.h"
-
-using namespace std;
+#include "../include/dp_algorithm.hpp"
+#include "../include/fptas_algorithm.hpp"
+#include "../include/lpt_algorithm.hpp"
+#include "../include/graph_coloring.hpp"
+#include "../include/input_module.hpp"
 
 int main() {
-  char ch;
-	// pour vérifier que l'opérateur = et que le  destructeur fonctionnent bien
-  Graphe<char,string> g1;	// création à vide
-  Graphe<char, string> g2;
+    // 准备一些数据容器
+    std::vector<int> tasks;
+    std::vector<std::vector<int>> compatibility;
+    int N = 0, m = 0;
 
-  Sommet<string> * s0, *s1, *s2, *s3;
+    // 方式 1: 让用户输入
+    read_input(tasks, compatibility, N, m);
+    // 或者:
+    // generate_random_tasks(tasks, compatibility, N, m, 20);
 
-  //------------------ on insère des nouveaux sommets isolés --------------------
-  s0 = g1.creerSommet("King's Landing");
-  s1 = g1.creerSommet("Winterfell");
-  s2 = g1.creerSommet("DragonStone");
-  s3 = g1.creerSommet("The wall");
+    // 打印输入的任务信息
+    std::cout << "Number of tasks N = " << N << ", number of machines m = " << m << std::endl;
+    std::cout << "Tasks: ";
+    for (int t : tasks) {
+        std::cout << t << " ";
+    }
+    std::cout << std::endl;
 
-  //----------------- on connecte certains sommets -------------------
-  Arete<char,string> * a0, * a1, *a2, *a3;
+    // 1) 测试 DP
+    int dpCmax = DP(tasks, m);
 
-  a0 = g1.creerArete('a',s1,s0);
-  a1 = g1.creerArete('b',s2,s1);
-  a2 = g1.creerArete('c',s3,s2);
-  a3 = g1.creerArete('d',s3,s1);
+    // 2) 测试 FPTAS (若 epsilon 太小，会被拒绝)
+    double epsilon = 1.0; // 示例
+    double approxCmax = FPTAS(tasks, m, epsilon);
 
-  //------------------ faire le dessin du graphe sur papier en notant les noms et les degrés pour comprendre la suite ----------------
-  cout <<"le graphe créé g1 est :" << endl << g1 << endl; cin >> ch;
+    // 3) 测试 LPT
+    // 注意 LPT 会对 tasks 排序，为了演示独立性，先拷贝一份
+    std::vector<int> tasks_copy = tasks;
+    int lptCmax = LPT(tasks_copy, m);
 
-  cout <<"le nombre de sommets de g1 est : " << g1.nombreSommets() << endl;
-  cout <<"le nombre d'arêtes de g1 est : " << g1.nombreAretes() << endl; cin >> ch;
+    // 4) 测试图着色
+    graph_coloring(tasks, compatibility);
 
-  PElement<Sommet<string>> * l0 = g1.voisins(s0);
-  cout << "la liste des voisins de s0 est : " << endl << l0 << endl; cin >> ch;
+    std::cout << "\n===== Summary =====\n"
+              << "DP Cmax = " << dpCmax << "\n"
+              << "FPTAS Cmax = " << approxCmax << "\n"
+              << "LPT Cmax = " << lptCmax << "\n"
+              << std::endl;
 
-  PElement<Arete<char,string>> * adj0 = g1.aretesAdjacentes(s0);
-  cout << "la liste des arêtes adjacentes à s0 est : " << endl << adj0 << endl; cin >> ch;
-
-  PElement<Sommet<string>> * l1 = g1.voisins(s1);
-  cout << "la liste des voisins de s1 est : " << endl << l1 << endl;
-
-  PElement<Arete<char,string>> * adj1 = g1.aretesAdjacentes(s1);
-  cout << "la liste des arêtes adjacentes à s1 est : " << endl << adj1 << endl; cin >> ch;
-
-  Arete<char,string> * a = g1.getAreteParSommets(s1,s3);
-
-  cout <<"l'arête joignant s1 et s3 est : " << endl << *a << endl; cin >> ch;
-
-  g2 = g1;
-	// à la fin de ce bloc, le destructeur est appelé pour g1. Cela permet de vérifier que l'op = a fait une vraie copie de g1
-
-  cout <<"le graphe créé g2 comme copie de g1 est :" << endl << g2 << endl; cin >> ch;
-
-  return 0;
+    return 0;
 }
