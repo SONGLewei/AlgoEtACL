@@ -1,4 +1,4 @@
-#include "../include/graph_coloring.hpp"
+#include "../includeAlgo/graph_coloring.hpp"
 #include <iostream>
 #include <vector>
 #include <algorithm>

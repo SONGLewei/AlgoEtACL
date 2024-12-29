@@ -3,13 +3,13 @@
 #include <ctime>
 #include <vector>
 #include <string>
-#include "../include/Graphe.h"
-#include "../include/Ville.h"
-#include "../include/GrapheExporter.h"
+#include "../includeGraphe/Graphe.h"
+#include "../includeGraphe/Ville.h"
+#include "../includeGraphe/GrapheExporter.h"
 
 // 这是我们在 input_module.cpp 中实现的头文件，
 // 里头含有 read_input_graphe(...) / run_algorithms_and_optimize(...) 声明
-#include "../include/input_module.hpp"
+#include "../includeAlgo/input_module.hpp"
 
 int main() {
     // 随机数种子，仅供演示

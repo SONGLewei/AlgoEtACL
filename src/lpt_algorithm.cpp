@@ -1,4 +1,4 @@
-#include "../include/lpt_algorithm.hpp"
+#include "../includeAlgo/lpt_algorithm.hpp"
 #include <iostream>
 #include <vector>
 #include <algorithm>

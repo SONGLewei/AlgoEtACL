@@ -1,4 +1,4 @@
-#include "../include/input_module.hpp"
+#include "../includeAlgo/input_module.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>

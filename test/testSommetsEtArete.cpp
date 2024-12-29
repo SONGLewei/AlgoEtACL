@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../include/Sommet.h"
-#include "../include/Arete.h"
+#include "../includeGraphe/Sommet.h"
+#include "../includeGraphe/Arete.h"
 
 int main() {
     Sommet<string> s1(1, "CityA");

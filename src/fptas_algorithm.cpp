@@ -1,4 +1,4 @@
-#include "../include/fptas_algorithm.hpp"
+#include "../includeAlgo/fptas_algorithm.hpp"
 #include <iostream>
 #include <climits>
 #include <algorithm>

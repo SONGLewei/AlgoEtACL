@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/GrapheAll.h"
+#include "../includeGraphe/GrapheAll.h"
 
 int main(){
     JSONLoader loader;

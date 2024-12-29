@@ -1,7 +1,7 @@
 #include <iostream>
-#include "../include/Arete.h"
-#include "../include/Sommet.h"
-#include "../include/PElement.h"
+#include "../includeGraphe/Arete.h"
+#include "../includeGraphe/Sommet.h"
+#include "../includeGraphe/PElement.h"
 
 int main() {
     PElement<Sommet<std::string>>* liste = nullptr;
