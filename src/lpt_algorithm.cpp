@@ -4,7 +4,7 @@
 #include <algorithm>
 
 /**
- * LPT 调度算法实现：先对任务按降序排列，然后依次分配到当前负载最小的机器上。
+ * 原有 LPT：返回 Cmax
  */
 int LPT(std::vector<int>& tasks, int m) {
     int N = (int)tasks.size();
@@ -13,37 +13,75 @@ int LPT(std::vector<int>& tasks, int m) {
         return 0;
     }
 
-    // 按处理时间降序排序
     std::sort(tasks.begin(), tasks.end(), std::greater<int>());
-
-    // 机器负载数组
     std::vector<int> machines(m, 0);
 
-    // 依次分配任务
     for (int i = 0; i < N; i++) {
-        // 找到当前负载最小的机器
         int min_machine = 0;
         for (int j = 1; j < m; j++) {
             if (machines[j] < machines[min_machine]) {
                 min_machine = j;
             }
         }
-        // 将任务 i 分配给 min_machine
         machines[min_machine] += tasks[i];
-
         std::cout << "Task " << i << " (time " << tasks[i]
-                  << ") assigned to machine " << (min_machine + 1)
+                  << ") -> machine " << (min_machine + 1)
                   << " (new load: " << machines[min_machine] << ")" << std::endl;
     }
 
-    // 计算最大完成时间
     int Cmax = 0;
     for (int load : machines) {
         if (load > Cmax) {
             Cmax = load;
         }
     }
-    std::cout << "LPT scheduling completed. Maximum completion time (Cmax): "
-              << Cmax << std::endl;
+    std::cout << "LPT completed. Cmax: " << Cmax << std::endl;
     return Cmax;
+}
+
+/**
+ * 新增 LPT_with_order：返回 (Cmax, assignment)
+ * assignment[i] = 任务 i 分配到的机器编号。
+ */
+std::pair<int, std::vector<int>> LPT_with_order(std::vector<int>& tasks, int m) {
+    int N = (int)tasks.size();
+    if (N == 0 || m <= 0) {
+        return {0, {}};
+    }
+
+    // 为了能回溯到“哪一个任务是原下标 i”，我们需要先保留原下标
+    std::vector<std::pair<int,int>> indexedTasks(N);
+    for (int i = 0; i < N; i++) {
+        indexedTasks[i] = { tasks[i], i }; 
+    }
+    // 降序
+    std::sort(indexedTasks.begin(), indexedTasks.end(), 
+              [](auto& a, auto& b){ return a.first > b.first; });
+
+    std::vector<int> machines(m, 0);        // 各机器当前负载
+    std::vector<int> assignment(N, -1);     // assignment[i] = 哪台机器
+
+    for (auto& it : indexedTasks) {
+        int taskTime = it.first; 
+        int originalIndex = it.second;
+
+        // 找当前负载最小的机器
+        int min_machine = 0;
+        for (int j = 1; j < m; j++) {
+            if (machines[j] < machines[min_machine]) {
+                min_machine = j;
+            }
+        }
+        // 分配
+        machines[min_machine] += taskTime;
+        assignment[originalIndex] = min_machine;
+    }
+
+    int Cmax = 0;
+    for (int load : machines) {
+        if (load > Cmax) {
+            Cmax = load;
+        }
+    }
+    return {Cmax, assignment};
 }
