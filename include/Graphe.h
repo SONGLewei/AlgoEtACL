@@ -1,37 +1,23 @@
 #pragma once
 
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <unordered_set>
 #include "PElement.h"
 #include "Sommet.h"
 #include "Arete.h"
-#include <string>
-#include <sstream>
 
 template <class S, class T>
 class Graphe {
-  public:
+public:
     PElement<Sommet<T>>* lSommets;
     PElement<Arete<S, T>>* lAretes;
     int prochaineClef;
 
-    void libererListeSommets() {
-        while (lSommets) {
-            PElement<Sommet<T>>* temp = lSommets->suivant;
-            delete lSommets;
-            lSommets = temp;
-        }
-    }
-
-    void libererListeAretes() {
-        while (lAretes) {
-            PElement<Arete<S, T>>* temp = lAretes->suivant;
-            delete lAretes;
-            lAretes = temp;
-        }
-    }
-
     Graphe() : lSommets(nullptr), lAretes(nullptr), prochaineClef(0) {}
 
-    Graphe(const Graphe<S, T>& other) 
+    Graphe(const Graphe<S, T>& other)
         : lSommets(PElement<Sommet<T>>::copier(other.lSommets)),
           lAretes(PElement<Arete<S, T>>::copier(other.lAretes)),
           prochaineClef(other.prochaineClef) {}
@@ -59,6 +45,7 @@ class Graphe {
     }
 
     void supprimerSommet(Sommet<T>* sommet) {
+        // Supprimer toutes les arêtes liées
         PElement<Arete<S, T>>* it = lAretes;
         while (it) {
             Arete<S, T>* currentArete = it->valeur;
@@ -67,6 +54,7 @@ class Graphe {
                 lAretes = PElement<Arete<S, T>>::retirer(lAretes, currentArete);
             }
         }
+        // Supprimer le sommet dans la liste
         lSommets = PElement<Sommet<T>>::retirer(lSommets, sommet);
     }
 
@@ -121,7 +109,6 @@ class Graphe {
 
     std::string toString() const {
         std::ostringstream oss;
-
         oss << "Sommets:\n";
         for (PElement<Sommet<T>>* it = lSommets; it; it = it->suivant) {
             oss << "  " << *(it->valeur) << "\n";
@@ -137,5 +124,39 @@ class Graphe {
 
     friend std::ostream& operator<<(std::ostream& os, const Graphe<S, T>& graphe) {
         return os << graphe.toString();
+    }
+
+    // -----------------------------------------------------------------------
+    // **新增函数**: 保留传入的边，删除其他边
+    // -----------------------------------------------------------------------
+    void supprimerToutesAretesExcept(const std::vector<Arete<S, T>*>& aretesAConserver) {
+        std::unordered_set<Arete<S, T>*> setAretToKeep;
+        setAretToKeep.insert(aretesAConserver.begin(), aretesAConserver.end());
+
+        PElement<Arete<S, T>>* it = lAretes;
+        while (it) {
+            Arete<S, T>* courant = it->valeur;
+            it = it->suivant;
+            if (setAretToKeep.find(courant) == setAretToKeep.end()) {
+                supprimerArete(courant);
+            }
+        }
+    }
+
+private:
+    void libererListeSommets() {
+        while (lSommets) {
+            PElement<Sommet<T>>* temp = lSommets->suivant;
+            delete lSommets; // delete 也会调用 PElement 析构 => 删除 sommet
+            lSommets = temp;
+        }
+    }
+
+    void libererListeAretes() {
+        while (lAretes) {
+            PElement<Arete<S, T>>* temp = lAretes->suivant;
+            delete lAretes;  // delete 也会调用 PElement 析构 => 删除 arete
+            lAretes = temp;
+        }
     }
 };

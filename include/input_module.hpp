@@ -1,31 +1,45 @@
 #pragma once
+
 #include <vector>
+#include <utility>
+#include "Graphe.h"
+#include "Ville.h"
 
 /**
- * @brief 从用户或随机方式获取任务信息、机器数、兼容矩阵等
- *
- * @param tasks         [out] 输出的任务处理时间列表
- * @param compatibility [out] 输出的兼容矩阵 (N*N)
- * @param N             [out] 任务个数
- * @param m             [out] 机器数量
- *
- * 也可以把所有这些返回值封装到一个结构体中返回，这里为演示保留原函数风格。
- */
-void read_input(std::vector<int>& tasks,
-                std::vector<std::vector<int>>& compatibility,
-                int& N,
-                int& m);
-
-/**
- * @brief 生成随机任务和兼容矩阵
- * @param tasks         [out] 生成的任务
- * @param compatibility [out] 生成的兼容矩阵
- * @param N             任务数
- * @param m             机器数
- * @param max_time      任务最大处理时间
+ * 之前可能就有的函数 (如你原先的逻辑),
+ * 如果不再需要，可以删除或注释
  */
 void generate_random_tasks(std::vector<int>& tasks,
                            std::vector<std::vector<int>>& compatibility,
                            int& N,
                            int& m,
                            int max_time);
+
+void read_input(std::vector<int>& tasks,
+                std::vector<std::vector<int>>& compatibility,
+                int& N,
+                int& m);
+
+/**
+ * 下列是我们新增/修改的函数声明，用于直接操作 Graphe
+ */
+
+/**
+ * @brief 让用户交互式创建一个完整图 (或你可以进行别的构造方式)
+ *        - 会询问用户 N, m, 选择的算法( algoChoice ), 以及 FPTAS的 epsilon(若algoChoice=3)
+ *        - 并为每个节点输入“处理时间”（仅示意）
+ */
+void read_input_graphe(Graphe<double, Ville>& graphe, int& m, double& epsilon, int& algoChoice);
+
+/**
+ * @brief 将接收的图进行调度优化：
+ *        1) 转换成 tasks
+ *        2) 调用所选算法 (DP / LPT / FPTAS)
+ *        3) 根据分配结果删除与最终路线无关的边
+ *        4) 输出最终图和 Cmax
+ */
+void run_algorithms_and_optimize(Graphe<double, Ville>& graphe,
+                                 int m,
+                                 double epsilon,
+                                 int algoChoice);
+

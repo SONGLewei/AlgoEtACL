@@ -1,11 +1,16 @@
 #pragma once
+
 #include <vector>
+#include <utility>
 
 /**
- * @brief 全多项式时间近似方案 (FPTAS) 调度算法
- * @param tasks    各任务的负载
- * @param m        机器数
- * @param epsilon  近似参数，越小越贴近最优，时间开销也越大
- * @return         近似的完成时间 Cmax
+ * 原有 FPTAS，返回近似 Cmax
  */
 double FPTAS(const std::vector<int>& tasks, int m, double epsilon);
+
+/**
+ * 新增：FPTAS_with_order，返回 (近似Cmax, 分配方案)
+ */
+std::pair<double, std::vector<int>> FPTAS_with_order(const std::vector<int>& tasks,
+                                                     int m,
+                                                     double epsilon);
