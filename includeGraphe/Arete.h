@@ -11,9 +11,11 @@ class Arete : public GElement<S> {
     Sommet<T> * debut;
     Sommet<T> * fin;
 
-    Arete(int clef, S v, Sommet<T> * debut, Sommet<T> * fin) : GElement<S>(clef, v),debut(debut), fin(fin) {
-      debut->augmenterDegre();
-      fin->augmenterDegre();
+    Arete(S v, Sommet<T>* debut, Sommet<T>* fin)
+        : GElement<S>(v), debut(debut), fin(fin)
+    {
+        debut->augmenterDegre();
+        fin->augmenterDegre();
     }
 
     ~Arete() {

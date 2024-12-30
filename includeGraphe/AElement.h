@@ -5,10 +5,13 @@
 using namespace std;
 
 class AElement {
+  private:
+    static int nextKey;
   public://Pour simplier le projet on peut mettre comme public
     int clef;//Pour stocker une seul cle
 
-    AElement(int clef) : clef(clef) {};
+    AElement()
+      : clef(nextKey++){}
     
     operator string() const {
       return "AElement: " + to_string(clef);
@@ -18,3 +21,5 @@ class AElement {
       return os << string(element);
     }
 };
+
+int AElement::nextKey = 0;

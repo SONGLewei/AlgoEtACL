@@ -10,7 +10,8 @@ class GElement : public AElement {
   public:
     T v;
 
-    GElement(int clef, T v) : AElement(clef), v(v) {};
+    GElement(T v)
+      :AElement(),v(v){}
 
     string valueToString() const {
       if constexpr (is_same<T, string>::value) {

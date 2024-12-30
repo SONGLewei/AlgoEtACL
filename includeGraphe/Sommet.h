@@ -10,7 +10,8 @@ class Sommet : public GElement<T> {
   public:
     int degre;
 
-    Sommet(int clef, T v) : GElement<T>(clef, v), degre(0) {}
+    Sommet(T v) 
+      :GElement<T>(v), degre(0) {}
 
     void augmenterDegre() {
       degre++;

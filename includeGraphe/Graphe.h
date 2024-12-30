@@ -13,18 +13,16 @@ class Graphe {
 public:
     PElement<Sommet<T>>* lSommets;
     PElement<Arete<S, T>>* lAretes;
-    int prochaineClef;
 
-    Graphe() : lSommets(nullptr), lAretes(nullptr), prochaineClef(0) {}
+    Graphe() : lSommets(nullptr), lAretes(nullptr){}
 
     Graphe(const Graphe<S, T>& other)
         : lSommets(PElement<Sommet<T>>::copier(other.lSommets)),
-          lAretes(PElement<Arete<S, T>>::copier(other.lAretes)),
-          prochaineClef(other.prochaineClef) {}
+          lAretes(PElement<Arete<S, T>>::copier(other.lAretes)){}
 
     ~Graphe() {
-        libererListeSommets();
         libererListeAretes();
+        libererListeSommets();
     }
 
     Graphe<S, T>& operator=(const Graphe<S, T>& other) {
@@ -33,13 +31,12 @@ public:
             libererListeAretes();
             lSommets = PElement<Sommet<T>>::copier(other.lSommets);
             lAretes = PElement<Arete<S, T>>::copier(other.lAretes);
-            prochaineClef = other.prochaineClef;
         }
         return *this;
     }
 
     Sommet<T>* creeSommet(const T& info) {
-        Sommet<T>* nouveauSommet = new Sommet<T>(prochaineClef++, info);
+        Sommet<T>* nouveauSommet = new Sommet<T>(info);
         lSommets = PElement<Sommet<T>>::ajouter(lSommets, nouveauSommet);
         return nouveauSommet;
     }
@@ -59,7 +56,7 @@ public:
     }
 
     Arete<S, T>* creeArete(const S& info, Sommet<T>* debut, Sommet<T>* fin) {
-        Arete<S, T>* nouvelleArete = new Arete<S, T>(prochaineClef++, info, debut, fin);
+        Arete<S, T>* nouvelleArete = new Arete<S, T>(info, debut, fin);
         lAretes = PElement<Arete<S, T>>::ajouter(lAretes, nouvelleArete);
         return nouvelleArete;
     }
@@ -126,28 +123,11 @@ public:
         return os << graphe.toString();
     }
 
-    // -----------------------------------------------------------------------
-    // **新增函数**: 保留传入的边，删除其他边
-    // -----------------------------------------------------------------------
-    void supprimerToutesAretesExcept(const std::vector<Arete<S, T>*>& aretesAConserver) {
-        std::unordered_set<Arete<S, T>*> setAretToKeep;
-        setAretToKeep.insert(aretesAConserver.begin(), aretesAConserver.end());
-
-        PElement<Arete<S, T>>* it = lAretes;
-        while (it) {
-            Arete<S, T>* courant = it->valeur;
-            it = it->suivant;
-            if (setAretToKeep.find(courant) == setAretToKeep.end()) {
-                supprimerArete(courant);
-            }
-        }
-    }
-
 private:
     void libererListeSommets() {
         while (lSommets) {
             PElement<Sommet<T>>* temp = lSommets->suivant;
-            delete lSommets; // delete 也会调用 PElement 析构 => 删除 sommet
+            delete lSommets;
             lSommets = temp;
         }
     }
@@ -155,7 +135,7 @@ private:
     void libererListeAretes() {
         while (lAretes) {
             PElement<Arete<S, T>>* temp = lAretes->suivant;
-            delete lAretes;  // delete 也会调用 PElement 析构 => 删除 arete
+            delete lAretes;
             lAretes = temp;
         }
     }

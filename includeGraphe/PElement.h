@@ -19,6 +19,7 @@ class PElement {
       suivant = nullptr;
     }
 
+    //ajouter un element a la tete
     static PElement<T>* ajouter(PElement<T>* liste, T* valeur) {
         return new PElement<T>(valeur, liste);
     }
@@ -51,7 +52,6 @@ class PElement {
         std::cout << "nullptr" << std::endl;
     }
 
-    // 静态方法：计算链表长度
     static int longueur(const PElement<T>* liste) {
         int count = 0;
         while (liste) {

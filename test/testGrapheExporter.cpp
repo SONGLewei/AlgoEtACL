@@ -2,6 +2,7 @@
 #include "../includeGraphe/GrapheAll.h"
 
 int main(){
+    /*"D:\DrMemory\bin\drmemory.exe" -- ".\testGrapheExporter.exe" pour tester内存泄漏*/
     JSONLoader loader;
     auto graphe = loader.chargerGrapheFromJSON("../13_fichiers_JSON/GrandEst.json");
     std::cout << "=== Graph Loaded from JSON ===\n";
