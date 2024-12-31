@@ -1,4 +1,4 @@
 #include "../includeGraphe/AElement.h"
 
-// 定义 AElement 的静态成员变量
+// 在此处定义 AElement::nextKey
 int AElement::nextKey = 0;

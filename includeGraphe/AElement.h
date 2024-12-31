@@ -1,25 +1,28 @@
 #pragma once
-
 #include <string>
+#include <iostream>
 
-using namespace std;
-
+/**
+ * @brief AElement : classe de base pour gérer un identifiant unique (clef).
+ */
 class AElement {
-  private:
+private:
+    // 静态成员变量的声明（不在这里初始化）
     static int nextKey;
-  public://Pour simplier le projet on peut mettre comme public
-    int clef;//Pour stocker une seul cle
+
+public:
+    int clef; // Identifiant unique
 
     AElement()
-      : clef(nextKey++){}
-    
-    operator string() const {
-      return "AElement: " + to_string(clef);
+        : clef(nextKey++) {
     }
 
-    friend ostream& operator<< (ostream& os, const AElement& element) {
-      return os << string(element);
+    // 转为字符串时，返回类似 "AElement: 3"
+    operator std::string() const {
+        return "AElement: " + std::to_string(clef);
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const AElement& element) {
+        return os << static_cast<std::string>(element);
     }
 };
-
-int AElement::nextKey = 0;

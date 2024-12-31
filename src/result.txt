@@ -3,12 +3,12 @@ Iteration with K = 1, Approx Cmax: 25936
 Improvement from previous Cmax: 100%
 Absolute change in Cmax: 1.79769e+308
 Cluster 1: Strasbourg Reims Metz Mulhouse Nancy Colmar Troyes Charleville-Mzires Chlons-en-Champagne Thionville pinal Haguenau Sarrebourg Sarreguemines Saint-Di-des-Vosges Verdun Vesoul Bar-le-Duc Briey Forbach Load: 25936
-Iteration time: 0.0051083 seconds.
-Previous Cmax: 25936, Current Cmax: 7702
-Iteration with K = 2, Approx Cmax: 7702
-Improvement from previous Cmax: 70.3038%
-Absolute change in Cmax: 18234
-Cluster 1: Strasbourg Metz Mulhouse Nancy Colmar Thionville pinal Haguenau Sarrebourg Sarreguemines Saint-Di-des-Vosges Vesoul Forbach Load: 7702
-Cluster 2: Reims Troyes Charleville-Mzires Chlons-en-Champagne Verdun Bar-le-Duc Briey Load: 2027
-Iteration time: 0.0058045 seconds.
-Final Cmax: 7702
+Iteration time: 0.0052442 seconds.
+Previous Cmax: 25936, Current Cmax: 5075.46
+Iteration with K = 2, Approx Cmax: 5075.46
+Improvement from previous Cmax: 80.4308%
+Absolute change in Cmax: 20860.5
+Cluster 1: Strasbourg Mulhouse Nancy Colmar pinal Haguenau Sarrebourg Sarreguemines Saint-Di-des-Vosges Vesoul Forbach Load: 5078
+Cluster 2: Reims Metz Troyes Charleville-Mzires Chlons-en-Champagne Thionville Verdun Bar-le-Duc Briey Load: 3596
+Iteration time: 0.0047211 seconds.
+Final Cmax: 5075.46
