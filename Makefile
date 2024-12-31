@@ -30,7 +30,7 @@ PROG = out
 _DEP = AElement.h GElement.h PElement.h Arete.h Sommet.h Graphe.h Ville.h JSONLoader.h json.hpp GrapheAll.h GrapheExporter.h
 DEP = $(patsubst %,$(IDIR)/%,$(_DEP))
 
-_OBJ = testGrapheExporter.o
+_OBJ = sendFile.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 # _OBJ = main.o
