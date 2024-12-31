@@ -7,13 +7,10 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
-// import Node;
-// import Edge;
 
-public class GraphPanel extends JPanel {
+public class GraphPanel<S,T> extends JPanel {
     private final GraphFrame parentFrame;
-    private final List<Node> nodes;
-    private final List<Edge> edges;
+    private final Graphe<S,T> graphe;
     private double scale = 1.0; // Initial Scale
     private double offsetX = 0.0;
     private double offsetY = 0.0;
@@ -21,8 +18,7 @@ public class GraphPanel extends JPanel {
 
     public GraphPanel(GraphFrame parentFrame) {
         this.parentFrame = parentFrame;
-        nodes = new ArrayList<>();
-        edges = new ArrayList<>();
+        this.graphe = new Graphe();
 
         // Gestion du déplacement avec clic gauche
         addMouseListener(new MouseAdapter() {
@@ -71,21 +67,11 @@ public class GraphPanel extends JPanel {
             repaint();
         });
 
-        // Gestion du zoom avec les touches Numpad+ et Numpad-
-        addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ADD) {
-                    scale *= 1.1; // Zoom avant
-                } else if (e.getKeyCode() == KeyEvent.VK_SUBTRACT) {
-                    scale /= 1.1; // Zoom arrière
-                }
-
-                repaint();
-            }
-        });
-
         setFocusable(true);
+    }
+
+    public Graphe<S,T> getGraphe() {
+        return graphe;
     }
 
     public void resetZoom() {
@@ -94,29 +80,6 @@ public class GraphPanel extends JPanel {
         offsetY = 0;
         parentFrame.updateZoomLabel(scale);
         repaint();
-    }
-
-    public void addNode(String name, int x, int y) {
-        nodes.add(new Node(name, x, y));
-        repaint();
-    }
-
-    public void addEdge(String start, String end, int weight) {
-        Node startNode = findNodeByName(start);
-        Node endNode = findNodeByName(end);
-        if (startNode != null && endNode != null) {
-            edges.add(new Edge(startNode, endNode, weight));
-            repaint();
-        }
-    }
-
-    private Node findNodeByName(String name) {
-        for (Node node : nodes) {
-            if (node._name.equals(name)) {
-                return node;
-            }
-        }
-        return null;
     }
 
     @Override
@@ -131,37 +94,53 @@ public class GraphPanel extends JPanel {
         int centerY = panelHeight / 2;
 
         // Centrer le dessin en fonction de l'echelle
-        AffineTransform transform = g2d.getTransform();
+        AffineTransform originalTransform = g2d.getTransform();
         g2d.translate(centerX, centerY);
         g2d.scale(scale, scale);
         g2d.translate(-centerX + offsetX, -centerY +offsetY);
 
+        // Dessiner les axes
+        //g2d.setColor(Color.BLACK);
+        //g2d.drawLine(-getWidth(), 0, getWidth(), 0);
+        //g2d.drawLine(0, -getHeight(), 0, getHeight());
+
+
+        // Dessiner le graphe
+        graphe.paint(g2d, scale, offsetX, offsetY);
+
+        g2d.setTransform(originalTransform);
+
         // Dessiner les arêtes
-        for (Edge edge : edges) {
-            g2d.drawLine(edge._start._x, edge._start._y, edge._end._x, edge._end._y);
-            // Afficher le poids au milieu de l'arête
-            int midX = (edge._start._x + edge._end._x) / 2;
-            int midY = (edge._start._y + edge._end._y) / 2;
-            g2d.drawString(String.valueOf(edge._weight), midX, midY);
-        }
+//        for (Edge edge : edges) {
+//            int scaledStartX = (int) (edge._start._x * scale);
+//            int scaledEndX = (int) (edge._end._x * scale);
+//            int scaledStartY = (int) (edge._start._y * scale);
+//            int scaledEndY = (int) (edge._end._y * scale);
+//
+//            g2d.drawLine(
+//                (int) (scaledStartX),
+//                (int) (scaledStartY),
+//                (int) (scaledEndX),
+//                (int) (scaledEndY)
+//            );
+//            // Afficher le poids au milieu de l'arête
+//            int midX = (int) ((edge._start._x + edge._end._x) / 2.0 * scale);
+//            int midY = (int) ((edge._start._y + edge._end._y) / 2.0 * scale);
+//            g2d.drawString(String.valueOf(edge._weight), midX, midY);
+//        }
 
         // Dessiner les noeuds
-        for (Node node : nodes) {
-            int scaledX = (int) (node._x * scale);
-            int scaledY = (int) (node._y * scale);
-
-            // Dessiner le cercle (Taille fixe peut importe le zoom)
-            g2d.setColor(Color.BLUE);
-            g2d.fillOval(scaledX - 10, scaledY - 10, 20, 20);
-
-            // Dessiner le nom
-            g2d.setColor(Color.BLACK);
-            g2d.drawString(node._name, scaledX - 15, scaledY - 15);
-        }
-
-        // Afficher le niveau de zoom
-        // g2d.setColor(Color.BLACK);
-        // String zoomText = String.format("Zoom: %.2f%%", scale * 100);
-        // g2d.drawString(zoomText, getWidth() - 100, getHeight() - 10);
+//        for (Node node : nodes) {
+//            int scaledX = (int) (node._x * scale);
+//            int scaledY = (int) (node._y * scale);
+//
+//            // Dessiner le cercle (Taille fixe peut importe le zoom)
+//            g2d.setColor(Color.BLUE);
+//            g2d.fillOval(scaledX - 10, scaledY - 10, 20, 20);
+//
+//            // Dessiner le nom
+//            g2d.setColor(Color.BLACK);
+//            g2d.drawString(node._name, scaledX - 15, scaledY - 15);
+//        }
     }
 }
