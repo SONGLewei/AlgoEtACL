@@ -10,4 +10,3 @@
  * @return       返回一个二维向量，每个元素代表一个聚类（聚类里是一组 Ville）
  */
 std::vector<std::vector<Ville>> kMeansClustering(const std::vector<Ville>& data, int K);
-

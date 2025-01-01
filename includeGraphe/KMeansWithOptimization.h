@@ -1,69 +1,69 @@
 #pragma once
 
 #include <vector>
-#include <utility>       // for std::pair
-#include <unordered_set> // for std::unordered_set
-#include "Graphe.h"
+#include <unordered_set>
 #include "Ville.h"
+#include "Graphe.h"
 
 /**
- * KMeansWithOptimization 类：
- *  - 用于对给定的地理位置（Ville）的图做KMeans聚类，然后再用FPTAS做负载平衡，示例性优化流程。
+ * @brief KMeansWithOptimization 类:
+ * - 对图进行 KMeans 聚类，并通过最小生成树 (MST) 合并子图。
  */
 class KMeansWithOptimization {
 public:
     /**
-     * @brief 对图进行KMeans+FPTAS综合优化
-     * @param graphe               原始图
-     * @param epsilon              FPTAS算法的精度参数
+     * @brief 优化图的主函数
+     * @param graphe 原始图
+     * @param epsilon FPTAS 的精度
      * @param improvementThreshold 停止优化的最小改进阈值
-     * @return 优化后(或迭代到最后)得到的合并图
+     * @return 优化后的图
      */
     Graphe<double, Ville> optimizeAndReturnGraph(
-        const Graphe<double, Ville>& graphe, 
-        double epsilon, 
+        const Graphe<double, Ville>& graphe,
+        double epsilon,
         double improvementThreshold
     );
 
+    /**
+     * @brief 计算一个子图的最小生成树
+     * @param cluster 输入的子图
+     * @return 子图的最小生成树
+     */
+    Graphe<double, Ville> generateMST(const Graphe<double, Ville>& cluster);
+
+    /**
+     * @brief 合并所有聚类的子图
+     * @param clusters 子图列表
+     * @return 合并后的图
+     */
+    Graphe<double, Ville> mergeClusters(const std::vector<Graphe<double, Ville>>& clusters);
+
 private:
     /**
-     * @brief 计算一个子图(通常是聚类后)的负载（这里简单示例为所有边权值之和）
+     * @brief 计算子图的负载
      * @param cluster 子图
-     * @return 该子图的负载(整型)
+     * @return 子图的负载
      */
     int calculateClusterLoad(const Graphe<double, Ville>& cluster);
 
     /**
-     * @brief 使用FPTAS来平衡所有聚类负载
-     * @param clusterLoads  每个聚类的负载列表
-     * @param numClusters   聚类个数
-     * @param epsilon       FPTAS精度
-     * @return (Cmax, 分配情况)。其中Cmax是近似最优的最大负载。
+     * @brief 使用 FPTAS 平衡负载
+     * @param clusterLoads 每个子图的负载
+     * @param numClusters 子图数量
+     * @param epsilon FPTAS 精度
+     * @return 平衡后的 (Cmax, 分配方案)
      */
     std::pair<double, std::vector<int>> balanceClustersFPTAS(
-        const std::vector<int>& clusterLoads, 
-        int numClusters, 
+        const std::vector<int>& clusterLoads,
+        int numClusters,
         double epsilon
     );
 
     /**
-     * @brief 将若干子图(对应不同聚类)合并为一个图
-     * @param clusters 聚类得到的若干子图
-     * @return 合并后的图
+     * @brief 并行计算所有子图的负载
+     * @param graphs 子图列表
+     * @return 负载列表
      */
-    Graphe<double, Ville> mergeClusters(
-        const std::vector<Graphe<double, Ville>>& clusters
-    );
-
-    /**
-     * @brief 计算当前所有聚类中的最大负载
-     * @param clusters  若干个聚类，每个聚类是一组 Ville
-     * @param graphe    原始图，用来提取子图并计算其负载
-     * @return 最大负载(双精度)
-     */
-    double calculateMaxLoad(
-        const std::vector<std::vector<Ville>>& clusters, 
-        const Graphe<double, Ville>& graphe
-    );
+    std::vector<int> parallelCalculateClusterLoads(const std::vector<Graphe<double, Ville>>& graphs);
 };
 
