@@ -1,8 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
-#include <sys/socket.h>
-#include <arpa/inet.h>
+#include <winsock2.h>
+#include <ws2tcpip.h>
+
 #include <unistd.h>
 
 void sendFile(const std::string& filename, const std::string& serverIp, int serverPort);
@@ -13,7 +14,15 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
+  WSADATA wsaData;
+    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+        std::cerr << "WSAStartup failed\n";
+        return 1;
+    }
+
   sendFile(argv[1], argv[2], std::stoi(argv[3]));
+
+  WSACleanup();
   return 0;
 }
 
@@ -31,14 +40,14 @@ void sendFile(const std::string& filename, const std::string& serverIp, int serv
 
   if (connect(sock, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) == -1) {
     std::cerr << "Connection to server failed\n";
-    close(sock);
+    closesocket(sock);
     return;
   }
 
   std::ifstream file(filename);
   if (!file.is_open()) {
     std::cerr << "Failed to open file\n";
-    close(sock);
+    closesocket(sock);
     return;
   }
 
@@ -50,5 +59,5 @@ void sendFile(const std::string& filename, const std::string& serverIp, int serv
   send(sock, jsonContent.c_str(), jsonContent.size(), 0);
   std::cout << "File sent successfully\n";
 
-  close(sock);
+  closesocket(sock);
 }
