@@ -43,6 +43,7 @@ Graphe<double, Ville> KMeansWithOptimization::optimizeAndReturnGraph(
     int iterationCount = 0;
 
     std::vector<std::vector<Ville>> bestClusters;
+    std::vector<int> bestClusterLoads; // 保存最佳簇的负载
 
     double initialCmax = calculateClusterLoad(graphe);
     std::cout << "Initial Cmax: " << initialCmax << "\n";
@@ -116,9 +117,11 @@ Graphe<double, Ville> KMeansWithOptimization::optimizeAndReturnGraph(
                   << ", Current Approx Cmax = " << currentCmax << "\n";
 
         if (currentCmax < prevCmax) {
-            bestGraph = mergeClusters(clusterGraphs);
-            bestClusters = currentClusters;
+            bestClusters = currentClusters; // 仅保存最佳簇分配
+            bestClusterLoads = clusterLoads; // 保存最佳负载
             prevCmax = currentCmax;
+            // 暂时不合并子图，保留逻辑
+            // bestGraph = mergeClusters(clusterGraphs);
         }
 
         // 判断停止条件
@@ -142,18 +145,22 @@ Graphe<double, Ville> KMeansWithOptimization::optimizeAndReturnGraph(
                   << std::chrono::duration<double>(end - start).count() << " seconds.\n";
     }
 
-    // 验证 bestGraph 的有效性
-    std::cout << "Best graph node count: " << bestGraph.nombreSommets() << "\n";
-    std::cout << "Best graph edge count: " << bestGraph.nombreAretes() << "\n";
-
-    // 如果 bestGraph 为空，打印警告信息
-    if (bestGraph.nombreSommets() == 0) {
-        std::cerr << "Warning: bestGraph has no nodes. Returning empty graph.\n";
-        return Graphe<double, Ville>(); // 返回一个空图，避免程序崩溃
+    // 打印优化后的每个簇及负载
+    std::cout << "Optimized Cluster Loads and Details:\n";
+    for (size_t i = 0; i < bestClusters.size(); ++i) {
+        std::cout << "Cluster " << i + 1 << ":\n";
+        std::cout << "  Nodes: ";
+        for (const auto& ville : bestClusters[i]) {
+            std::cout << ville.name << " ";
+        }
+        std::cout << "\n";
+        std::cout << "  Optimized Load: " << bestClusterLoads[i] << "\n";
     }
 
-    return bestGraph;
+    // 返回空图，避免后续操作问题
+    return Graphe<double, Ville>();
 }
+
 
 int KMeansWithOptimization::calculateClusterLoad(const Graphe<double, Ville>& cluster) {
     double totalLoad = 0.0;
