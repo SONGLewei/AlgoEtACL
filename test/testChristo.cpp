@@ -1,14 +1,15 @@
 #include <iostream>
-#include "../includeGraphe/GrapheAll.h"
-#include "../includeAlgo/Kmeans.h"
+#include "../includeAlgo/Christo.h"
 
-extern std::vector<Sommet<Ville>*> getAllCities(const Graphe<double, Ville>& graphe);
-
-int main(){
+int main() {
+    // Load your graph here
+    // 加载图数据。
     JSONLoader loader;
     auto graphe = loader.chargerGrapheFromJSON("../13_fichiers_JSON/GrandEst.json");
-
-    int k = 8;
+    // Assume KMeans clustering is done and you have the clusters
+    // 假设已经完成 KMeans 聚类，获得了簇分组。
+    for(int k = 1; k<8;k++){
+    //int k = 8; // 假设循环到了k = 3
     auto clusters = KMeansPP(graphe, k);
 
     assert((int)clusters.size() == k);
@@ -42,6 +43,14 @@ int main(){
         }
         std::cout << "\n";
     }
+
+    // Calculate and print the maximum Cmax among all clusters
+    // 计算并输出所有簇中的最大 Cmax。
+    double maxCmax = getMaxCmax(graphe, clusters);
+    std::cout << "Maximum Cmax among all clusters: " << maxCmax << std::endl;
+    std::cout<<" "<<endl;
+    std::cout<<" "<<endl;
+    std::cout<<" "<<endl;
+    }
     return 0;
-     
 }

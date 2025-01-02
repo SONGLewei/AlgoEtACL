@@ -50,7 +50,10 @@ double distanceCityToCity(const Graphe<double, Ville>& graphe,
                           const Sommet<Ville>* c2)
 {
     Arete<double, Ville>* arete = graphe.getAreteParSommets(c1, c2);
+    if (arete) {
         return arete->v;
+    }
+    return std::numeric_limits<double>::max();
 }
 
 /**
@@ -66,10 +69,18 @@ std::vector<int> kmeansPlusPlusInit(const Graphe<double, Ville>& graphe,
     std::vector<int> centers;
     centers.reserve(k);
 
-    static std::mt19937 gen( static_cast<unsigned int>(std::time(nullptr)) );
+    if ((int)cities.size() <= k) {
+        // 如果城市数不超过K，就直接把所有城市都做中心
+        for (int i = 0; i < (int)cities.size(); i++) {
+            centers.push_back(i);
+        }
+        return centers;
+    }
+    
+    static std::mt19937 gen(static_cast<unsigned int>(std::time(nullptr)));
 
-    //la premiere
-    std::uniform_int_distribution<> distIndex(0, (int)cities.size()-1);
+    // 1) 先随机选一个中心
+    std::uniform_int_distribution<> distIndex(0, (int)cities.size() - 1);
     int firstCenterIndex = distIndex(gen);
     centers.push_back(firstCenterIndex);
 
@@ -89,6 +100,7 @@ std::vector<int> kmeansPlusPlusInit(const Graphe<double, Ville>& graphe,
             minDistances[i] = dMin;
         }
 
+        //按照 “D(x)^2 / sum(D(x)^2)” 的分布来随机选一个点做新中心
         double sumD2 = 0.0;
         for (double d : minDistances) {
             sumD2 += (d * d);
@@ -99,7 +111,7 @@ std::vector<int> kmeansPlusPlusInit(const Graphe<double, Ville>& graphe,
 
         double cumulative = 0.0;
         int chosenIndex = -1;
-        for (int i = 0; i<(int)cities.size(); i++) {
+        for (int i = 0; i < (int)cities.size(); i++) {
             cumulative += (minDistances[i] * minDistances[i]);
             if (cumulative >= r) {
                 chosenIndex = i;
@@ -115,14 +127,17 @@ std::vector<int> kmeansPlusPlusInit(const Graphe<double, Ville>& graphe,
 /**
  * La fonction main ici, pour realiser le Kmeans++
  * retourner le clef de chaque ville
- * @param cities : tous les villes
- * @param centerIndices : les centre de chaque cluster ( ce sont les villes)
+ * @param graphe : le graphe contenant toutes les villes et distances
+ * @param k : le nombre de clusters
  */
 std::vector<std::vector<int>> KMeansPP(const Graphe<double, Ville>& graphe, int k)
 {
     //0) Collecter la liste des villes
     std::vector<Sommet<Ville>*> cities = getAllCities(graphe);
     int n = (int)cities.size();
+    if (n == 0 || k <= 0) {
+        return {}; // 无效输入时，直接返回空
+    }
 
     //1) Utilisez K-Means++ pour sélectionner k "centres initiaux" (ce sont de véritables villes)
     //1) 用 K-Means++ 选取 k 个“初始中心” (它们是实际的城市)
@@ -140,14 +155,17 @@ std::vector<std::vector<int>> KMeansPP(const Graphe<double, Ville>& graphe, int 
         centerLons[i] = cities[centerIndices[i]]->v.longitude;
     }
 
+    std::vector<int> assignments(n, -1); //记录每个城市属于哪个簇
     bool changed = true;
     int maxIterations = 100;
-    std::vector<int> assignments(n, -1);
+
+    //可以在这里也放一个随机引擎, 以处理空簇
+    static std::mt19937 gen(static_cast<unsigned int>(std::time(nullptr)));
 
     while (changed && maxIterations-- > 0) {
         changed = false;
 
-        //a) assignment step: Attribuez à chaque ville le centroïde le plus proche
+        // a)assignment step: 给每个城市分配到最近的中心
         for (int i = 0; i < n; i++) {
             double dMin = std::numeric_limits<double>::max();
             int bestCluster = -1;
@@ -164,35 +182,40 @@ std::vector<std::vector<int>> KMeansPP(const Graphe<double, Ville>& graphe, int 
             }
         }
 
-        //b) étape de mise à jour : Recalculer le centroïde de chaque cluster (prendre la latitude et la longitude moyennes de tous les points)
-        //S'il n'y a aucun intérêt dans un certain cluster (cas extrême), gardez-le inchangé ou choisissez-en un au hasard
-        //b) update step: 重新计算各簇的质心(取所有点的纬度均值、经度均值)
-        //如果有某个簇没有点(极端情况)，保持不变或随机挑一个
+        //b) update step: 重新计算各簇的质心(若某簇为空，则随机挑一个新城市作为质心)
         std::vector<double> sumLat(k, 0.0);
         std::vector<double> sumLon(k, 0.0);
-        std::vector<int>    count(k, 0);
+        std::vector<int> count(k, 0);
 
         for (int i = 0; i < n; i++) {
             int c = assignments[i];
             sumLat[c] += cities[i]->v.latitude;
             sumLon[c] += cities[i]->v.longitude;
-            count[c]  += 1;
+            count[c]++;
         }
 
         for (int c = 0; c < k; c++) {
             if (count[c] > 0) {
+                //正常更新中心为(均值纬度，均值经度)
                 double newLat = sumLat[c] / count[c];
                 double newLon = sumLon[c] / count[c];
+                //判断是否变化大于一定阈值(这一步也可选)
                 if (std::fabs(newLat - centerLats[c]) > 1e-7 ||
                     std::fabs(newLon - centerLons[c]) > 1e-7) {
                     centerLats[c] = newLat;
                     centerLons[c] = newLon;
                 }
+            } else {
+                //如果某个簇没有城市，则随机挑一座城市当新的质心
+                std::uniform_int_distribution<> distIndex(0, n - 1);
+                int randomIndex = distIndex(gen);
+                centerLats[c] = cities[randomIndex]->v.latitude;
+                centerLons[c] = cities[randomIndex]->v.longitude;
             }
         }
     }
 
-    // return le clef
+    //把最终的分组结果(只返回城市的 clef)打包返回
     std::vector<std::vector<int>> clusters(k);
     for (int i = 0; i < n; i++) {
         int c = assignments[i];
