@@ -50,8 +50,8 @@ public class FileReceiver {
                 String ville = (String) noeud.get("ville");
                 double latitude = (double) noeud.get("latitude");
                 double longitude = (double) noeud.get("longitude");
-                int x = (int) (100.0 * (longitude + 5)); // Ajustement pour un affichage lisible
-                int y = (int) (100.0 * (50 - latitude)); // Inverser pour un affichage écran
+                int x = (int) (100 * (longitude+5)); // Ajustement pour un affichage lisible
+                int y = (int) (100.0 * (50-latitude)); // Inverser pour un affichage écran
                 graphe.addNode(new Node(ville, x, y));
             }
 
@@ -63,7 +63,8 @@ public class FileReceiver {
                 Node start = graphe.findNodeByName(de);
                 Node end = graphe.findNodeByName(vers);
                 if (start != null && end != null) {
-                    graphe.addEdge(new Edge(start, end, 1)); // Poids par défaut
+                    int distance = start.getDistance(end);
+                    graphe.addEdge(new Edge(start, end, distance)); // Poids par défaut
                 }
             }
 
