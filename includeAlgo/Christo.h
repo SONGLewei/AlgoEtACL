@@ -204,6 +204,110 @@ double calculateChristofides(const Graphe<double, Ville>& graphe, const std::vec
     return hamiltonianWeight;
 }
 
+std::pair<double, std::vector<int>> calculateChristofidesWithPath(const Graphe<double, Ville>& graphe, const std::vector<int>& cluster) {
+    std::set<std::pair<int, int>> mstEdges;
+    double mstWeight = calculateMST(graphe, cluster);
+
+    std::vector<int> oddVertices;
+    for (int id : cluster) {
+        Sommet<Ville>* sommet = getSommetParClef(graphe, id);
+        if (sommet && sommet->degre % 2 != 0) {
+            oddVertices.push_back(id);
+        }
+    }
+
+    double matchingWeight = 0.0;
+    std::set<std::pair<int, int>> matchedEdges;
+    while (true) {
+        int u = -1, v = -1;
+        double minWeight = std::numeric_limits<double>::max();
+
+        for (size_t i = 0; i < oddVertices.size(); i++) {
+            for (size_t j = i + 1; j < oddVertices.size(); j++) {
+                std::pair<int, int> edge = {std::min(oddVertices[i], oddVertices[j]), std::max(oddVertices[i], oddVertices[j])};
+                if (matchedEdges.find(edge) != matchedEdges.end()) continue;
+
+                double weight = distanceCityToCity(graphe, 
+                    getSommetParClef(graphe, oddVertices[i]), 
+                    getSommetParClef(graphe, oddVertices[j]));
+                if (weight < minWeight) {
+                    minWeight = weight;
+                    u = i;
+                    v = j;
+                }
+            }
+        }
+
+        if (u == -1 || v == -1) break;
+
+        matchedEdges.insert({std::min(oddVertices[u], oddVertices[v]), std::max(oddVertices[u], oddVertices[v])});
+        matchingWeight += minWeight;
+    }
+
+    std::set<std::pair<int, int>> eulerEdges = mstEdges;
+    for (auto &me : matchedEdges) {
+        eulerEdges.insert(me);
+    }
+
+    std::vector<int> eulerCircuit;
+    if (!cluster.empty()) {
+        constructEulerianCircuit(graphe, cluster[0], eulerCircuit, eulerEdges);
+    }
+
+    std::vector<int> hamiltonianCircuit;
+    constructHamiltonianCircuit(eulerCircuit, hamiltonianCircuit);
+
+    double hamiltonianWeight = 0.0;
+    for (size_t i = 1; i < hamiltonianCircuit.size(); i++) {
+        hamiltonianWeight += distanceCityToCity(graphe, 
+            getSommetParClef(graphe, hamiltonianCircuit[i - 1]), 
+            getSommetParClef(graphe, hamiltonianCircuit[i]));
+    }
+
+    return {hamiltonianWeight, hamiltonianCircuit};
+}
+
+std::vector<std::pair<double, std::vector<int>>> getAllClusterRoutes(const Graphe<double, Ville>& graphe, const std::vector<std::vector<int>>& clusters) {
+    std::vector<std::pair<double, std::vector<int>>> allRoutes;
+
+    for (size_t i = 0; i < clusters.size(); i++) {
+        auto [cMax, path] = calculateChristofidesWithPath(graphe, clusters[i]);
+        allRoutes.push_back({cMax, path});
+
+        // 打印每个簇的 Cmax 和路径
+        std::cout << "Cluster " << i << " Cmax: " << cMax << "\nPath: ";
+        for (int vertex : path) {
+            Sommet<Ville>* sommet = getSommetParClef(graphe, vertex);
+            if (sommet) {
+                std::cout << sommet->v.name << " ";
+            }
+        }
+        std::cout << std::endl;
+    }
+
+    return allRoutes;
+}
+
+
+
+std::pair<double, std::vector<int>> getMaxCmaxWithPath(const Graphe<double, Ville>& graphe, const std::vector<std::vector<int>>& clusters) {
+    double maxCmax = 0.0;
+    std::vector<int> cmaxPath;
+
+    for (size_t i = 0; i < clusters.size(); i++) {
+        auto [cMax, path] = calculateChristofidesWithPath(graphe, clusters[i]);
+        std::cout << "Cluster " << i << " Cmax: " << cMax << std::endl;
+
+        if (cMax > maxCmax) {
+            maxCmax = cMax;
+            cmaxPath = path; // 更新对应路径
+        }
+    }
+
+    return {maxCmax, cmaxPath};
+}
+
+
 // Function to calculate and return the maximum Cmax among all clusters
 // 计算所有簇的Cmax进行比较并返回最大的 Cmax。
 double getMaxCmax(const Graphe<double, Ville>& graphe, const std::vector<std::vector<int>>& clusters) {
@@ -217,5 +321,80 @@ double getMaxCmax(const Graphe<double, Ville>& graphe, const std::vector<std::ve
     }
     return maxCmax;
 }
+
+
+std::vector<std::string> getTruckRouteForCluster(const Graphe<double, Ville>& graphe, const std::vector<int>& cluster) {
+    std::vector<int> eulerCircuit;
+    std::vector<int> hamiltonianCircuit;
+
+    if (cluster.empty()) {
+        return {}; // 如果簇为空，返回空路线
+    }
+
+    // Step 1: 计算最小生成树（MST）并找到所有奇度顶点
+    calculateMST(graphe, cluster);
+
+    std::vector<int> oddVertices;
+    for (int id : cluster) {
+        Sommet<Ville>* sommet = getSommetParClef(graphe, id);
+        if (sommet && sommet->degre % 2 != 0) {
+            oddVertices.push_back(id);
+        }
+    }
+
+    // Step 2: 对奇度顶点进行最小权匹配，形成欧拉图
+    std::set<std::pair<int, int>> mstEdges;
+    std::set<std::pair<int, int>> matchedEdges;
+
+    // 执行最小权匹配，计算 matchedEdges
+    for (size_t i = 0; i < oddVertices.size(); i++) {
+        for (size_t j = i + 1; j < oddVertices.size(); j++) {
+            matchedEdges.insert({std::min(oddVertices[i], oddVertices[j]), std::max(oddVertices[i], oddVertices[j])});
+        }
+    }
+
+    // 合并 MST 和匹配的边，形成欧拉图
+    std::set<std::pair<int, int>> eulerEdges = mstEdges;
+    for (auto& edge : matchedEdges) {
+        eulerEdges.insert(edge);
+    }
+
+    // Step 3: 构造欧拉回路
+    constructEulerianCircuit(graphe, cluster[0], eulerCircuit, eulerEdges);
+
+    // Step 4: 构造哈密顿回路（去重）
+    constructHamiltonianCircuit(eulerCircuit, hamiltonianCircuit);
+
+    // Step 5: 将哈密顿回路的 ID 转换为城市名字
+    std::vector<std::string> truckRoute;
+    for (int id : hamiltonianCircuit) {
+        Sommet<Ville>* sommet = getSommetParClef(graphe, id);
+        if (sommet) {
+            truckRoute.push_back(sommet->v.name); // 获取城市名字
+        }
+    }
+
+    return truckRoute; // 返回城市名字列表，表示卡车的路线
+}
+
+
+std::vector<std::vector<std::string>> getAllTruckRoutes(const Graphe<double, Ville>& graphe, const std::vector<std::vector<int>>& clusters) {
+    std::vector<std::vector<std::string>> allRoutes;
+
+    for (const auto& cluster : clusters) {
+        std::vector<std::string> route = getTruckRouteForCluster(graphe, cluster);
+        allRoutes.push_back(route);
+
+        // 打印每个簇的路线
+        std::cout << "Truck Route for Cluster: ";
+        for (const auto& cityName : route) {
+            std::cout << cityName << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    return allRoutes;
+}
+
 
 

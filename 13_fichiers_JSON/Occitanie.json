@@ -1,9 +1,9 @@
 [
   {"ville": "Toulouse", "latitude": 43.60, "longitude": 1.44},
   {"ville": "Montpellier", "latitude": 43.61, "longitude": 3.87},
-  {"ville": "Nîmes", "latitude": 43.83, "longitude": 4.36},
+  {"ville": "Nmes", "latitude": 43.83, "longitude": 4.36},
   {"ville": "Perpignan", "latitude": 42.70, "longitude": 2.89},
-  {"ville": "Béziers", "latitude": 43.34, "longitude": 3.21},
+  {"ville": "Bziers", "latitude": 43.34, "longitude": 3.21},
   {"ville": "Narbonne", "latitude": 43.18, "longitude": 3.00},
   {"ville": "Albi", "latitude": 43.93, "longitude": 2.15},
   {"ville": "Carcassonne", "latitude": 43.21, "longitude": 2.35},
@@ -18,5 +18,5 @@
   {"ville": "Foix", "latitude": 42.96, "longitude": 1.60},
   {"ville": "Castres", "latitude": 43.60, "longitude": 2.24},
   {"ville": "Lourdes", "latitude": 43.10, "longitude": -0.05},
-  {"ville": "Sète", "latitude": 43.40, "longitude": 3.68}
+  {"ville": "Ste", "latitude": 43.40, "longitude": 3.68}
 ]

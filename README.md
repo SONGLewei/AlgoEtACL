@@ -1,18 +1,6 @@
-# To-Do :
-
-Ecrire la fonction main qui :
-- Charger les fichiers JSON
-- Crée le graphe complet à partir de ce fichier JSON
-- Appliquer l'algorithme FPTAS pour trouver le trajet optimum
-- Exporter le graphe optimal en JSON
-
-Sur l'interface :
-- Garantir l'indépendance de la librairie graphique
-- Charger les JSONs optimaux au lieu des JSONs de base
-
 # Utilisation du Graphe
 
-Chaque fois que vous utilisez un graphe, il faut inclure `GrapheAll.h` dans votre fichier `.cpp`. C'est tout.
+Chaque fois que vous utilisez un graphe, il faut inclure `GrapheAll.h` et `BuildNewGraphe` dans votre fichier `.cpp`. C'est tout.
 
 ## Charger un fichier JSON en Graphe
 

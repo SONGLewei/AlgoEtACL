@@ -8,7 +8,7 @@ int main(){
     JSONLoader loader;
     auto graphe = loader.chargerGrapheFromJSON("../13_fichiers_JSON/GrandEst.json");
 
-    int k = 8;
+    int k = 3;
     auto clusters = KMeansPP(graphe, k);
 
     assert((int)clusters.size() == k);

@@ -6,10 +6,8 @@ int main() {
     // 加载图数据。
     JSONLoader loader;
     auto graphe = loader.chargerGrapheFromJSON("../13_fichiers_JSON/GrandEst.json");
-    // Assume KMeans clustering is done and you have the clusters
-    // 假设已经完成 KMeans 聚类，获得了簇分组。
+
     for(int k = 1; k<8;k++){
-    //int k = 8; // 假设循环到了k = 3
     auto clusters = KMeansPP(graphe, k);
 
     assert((int)clusters.size() == k);
