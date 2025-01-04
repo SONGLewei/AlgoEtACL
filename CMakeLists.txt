@@ -10,7 +10,7 @@ file(GLOB ALGO_SRC "src/Algo/*.cpp")
 file(GLOB GRAPHE_SRC "src/Graphe/*.cpp")
 
 set(SOURCES
-    src/ChristoTotal.cpp 
+    src/PDTotal.cpp 
     ${ALGO_SRC}
     ${GRAPHE_SRC}
 )

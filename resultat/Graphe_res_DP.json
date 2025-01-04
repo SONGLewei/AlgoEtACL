@@ -98,54 +98,6 @@
   ],
   "aretes": [
     {
-      "de": "Le Puy-en-Velay",
-      "vers": "Aurillac"
-    },
-    {
-      "de": "Valence",
-      "vers": "Le Puy-en-Velay"
-    },
-    {
-      "de": "Montlimar",
-      "vers": "Valence"
-    },
-    {
-      "de": "Aurillac",
-      "vers": "Montlimar"
-    },
-    {
-      "de": "Roanne",
-      "vers": "Villefranche-sur-Sane"
-    },
-    {
-      "de": "Clermont-Ferrand",
-      "vers": "Roanne"
-    },
-    {
-      "de": "Saint-tienne",
-      "vers": "Clermont-Ferrand"
-    },
-    {
-      "de": "Vienne",
-      "vers": "Saint-tienne"
-    },
-    {
-      "de": "Lyon",
-      "vers": "Vienne"
-    },
-    {
-      "de": "Villeurbanne",
-      "vers": "Lyon"
-    },
-    {
-      "de": "Bourg-en-Bresse",
-      "vers": "Villeurbanne"
-    },
-    {
-      "de": "Villefranche-sur-Sane",
-      "vers": "Bourg-en-Bresse"
-    },
-    {
       "de": "Thonon-les-Bains",
       "vers": "Albertville"
     },
@@ -172,6 +124,54 @@
     {
       "de": "Albertville",
       "vers": "Grenoble"
+    },
+    {
+      "de": "Clermont-Ferrand",
+      "vers": "Aurillac"
+    },
+    {
+      "de": "Saint-tienne",
+      "vers": "Clermont-Ferrand"
+    },
+    {
+      "de": "Valence",
+      "vers": "Saint-tienne"
+    },
+    {
+      "de": "Montlimar",
+      "vers": "Valence"
+    },
+    {
+      "de": "Le Puy-en-Velay",
+      "vers": "Montlimar"
+    },
+    {
+      "de": "Aurillac",
+      "vers": "Le Puy-en-Velay"
+    },
+    {
+      "de": "Roanne",
+      "vers": "Villefranche-sur-Sane"
+    },
+    {
+      "de": "Vienne",
+      "vers": "Roanne"
+    },
+    {
+      "de": "Lyon",
+      "vers": "Vienne"
+    },
+    {
+      "de": "Villeurbanne",
+      "vers": "Lyon"
+    },
+    {
+      "de": "Bourg-en-Bresse",
+      "vers": "Villeurbanne"
+    },
+    {
+      "de": "Villefranche-sur-Sane",
+      "vers": "Bourg-en-Bresse"
     }
   ]
 }

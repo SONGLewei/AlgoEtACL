@@ -6,12 +6,15 @@ int main(){
     std::vector<std::vector<int>> bestClusters;
     std::vector<std::pair<double, std::vector<std::string>>> bestResults;
     std::string outputPath = "D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/resultat/Graphe_res_GL.json";
+    std::string outputPathComplet = "D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/resultat/Graphe_res_GL_COM.json";
     double lastCmax = std::numeric_limits<double>::max();
     double bestCmax = std::numeric_limits<double>::max();
     int bestK = 1; 
 
     JSONLoader loader;
     auto graphe = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/GrandEst.json");
+    //Exporter graphe complet
+    GrapheExporter::exporter(graphe, outputPathComplet);
 
     //Soit on a maxim 5 camions, parce que si avec envrion 20 villes, 7 est largement
     for (int k = 1; k <= 7; k++) {

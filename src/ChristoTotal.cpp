@@ -6,6 +6,7 @@ int main(){
     std::vector<std::vector<int>> bestClusters;
     std::vector<std::pair<double, std::vector<std::string>>>  bestResults;
     std::string outputPath = "D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/resultat/Graphe_res_CH.json";
+    std::string outputPathComplet = "D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/resultat/Graphe_res_CH_COM.json";
     double lastCmax = std::numeric_limits<double>::max(); // 上一次的Cmax
     double bestCmax = std::numeric_limits<double>::max(); // 当前k下最优Cmax
     int bestK = 1; 
@@ -25,6 +26,7 @@ int main(){
     //auto graphePA = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Pays_de_la_Loire.json");
     //auto graphePR = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Provence_Alpes_Cote_Azur.json");
 
+    GrapheExporter::exporter(graphe, outputPathComplet);
 
     for (int k = 1; k <= 7; k++) {
         bestCmax = std::numeric_limits<double>::max();
