@@ -21,5 +21,3 @@ class AElement {
       return os << string(element);
     }
 };
-
-int AElement::nextKey = 0;

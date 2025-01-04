@@ -1,0 +1,177 @@
+{
+  "noeuds": [
+    {
+      "ville": "Bourg-en-Bresse",
+      "latitude": 46.21,
+      "longitude": 5.22
+    },
+    {
+      "ville": "Grenoble",
+      "latitude": 45.19,
+      "longitude": 5.74
+    },
+    {
+      "ville": "Vienne",
+      "latitude": 45.52,
+      "longitude": 4.88
+    },
+    {
+      "ville": "Montlimar",
+      "latitude": 44.56,
+      "longitude": 4.75
+    },
+    {
+      "ville": "Roanne",
+      "latitude": 46.03,
+      "longitude": 4.08
+    },
+    {
+      "ville": "Valence",
+      "latitude": 44.93,
+      "longitude": 4.89
+    },
+    {
+      "ville": "Annemasse",
+      "latitude": 46.19,
+      "longitude": 6.24
+    },
+    {
+      "ville": "Aurillac",
+      "latitude": 44.92,
+      "longitude": 2.44
+    },
+    {
+      "ville": "Aix-les-Bains",
+      "latitude": 45.69,
+      "longitude": 5.92
+    },
+    {
+      "ville": "Thonon-les-Bains",
+      "latitude": 46.37,
+      "longitude": 6.48
+    },
+    {
+      "ville": "Chambry",
+      "latitude": 45.56,
+      "longitude": 5.92
+    },
+    {
+      "ville": "Le Puy-en-Velay",
+      "latitude": 45.04,
+      "longitude": 3.89
+    },
+    {
+      "ville": "Villefranche-sur-Sane",
+      "latitude": 45.98,
+      "longitude": 4.72
+    },
+    {
+      "ville": "Albertville",
+      "latitude": 45.67,
+      "longitude": 6.39
+    },
+    {
+      "ville": "Annecy",
+      "latitude": 45.9,
+      "longitude": 6.13
+    },
+    {
+      "ville": "Saint-tienne",
+      "latitude": 45.44,
+      "longitude": 4.39
+    },
+    {
+      "ville": "Villeurbanne",
+      "latitude": 45.77,
+      "longitude": 4.88
+    },
+    {
+      "ville": "Clermont-Ferrand",
+      "latitude": 45.78,
+      "longitude": 3.08
+    },
+    {
+      "ville": "Lyon",
+      "latitude": 45.76,
+      "longitude": 4.84
+    }
+  ],
+  "aretes": [
+    {
+      "de": "Le Puy-en-Velay",
+      "vers": "Aurillac"
+    },
+    {
+      "de": "Valence",
+      "vers": "Le Puy-en-Velay"
+    },
+    {
+      "de": "Montlimar",
+      "vers": "Valence"
+    },
+    {
+      "de": "Aurillac",
+      "vers": "Montlimar"
+    },
+    {
+      "de": "Roanne",
+      "vers": "Villefranche-sur-Sane"
+    },
+    {
+      "de": "Clermont-Ferrand",
+      "vers": "Roanne"
+    },
+    {
+      "de": "Saint-tienne",
+      "vers": "Clermont-Ferrand"
+    },
+    {
+      "de": "Vienne",
+      "vers": "Saint-tienne"
+    },
+    {
+      "de": "Lyon",
+      "vers": "Vienne"
+    },
+    {
+      "de": "Villeurbanne",
+      "vers": "Lyon"
+    },
+    {
+      "de": "Bourg-en-Bresse",
+      "vers": "Villeurbanne"
+    },
+    {
+      "de": "Villefranche-sur-Sane",
+      "vers": "Bourg-en-Bresse"
+    },
+    {
+      "de": "Thonon-les-Bains",
+      "vers": "Albertville"
+    },
+    {
+      "de": "Annemasse",
+      "vers": "Thonon-les-Bains"
+    },
+    {
+      "de": "Annecy",
+      "vers": "Annemasse"
+    },
+    {
+      "de": "Aix-les-Bains",
+      "vers": "Annecy"
+    },
+    {
+      "de": "Chambry",
+      "vers": "Aix-les-Bains"
+    },
+    {
+      "de": "Grenoble",
+      "vers": "Chambry"
+    },
+    {
+      "de": "Albertville",
+      "vers": "Grenoble"
+    }
+  ]
+}

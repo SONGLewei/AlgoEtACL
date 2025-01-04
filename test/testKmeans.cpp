@@ -1,6 +1,7 @@
 #include <iostream>
-#include "../includeGraphe/GrapheAll.h"
-#include "../includeAlgo/Kmeans.h"
+#include "../include/Graphe/BuildNewGraphe.h"
+#include "../include/Algo/Kmeans.h"
+
 
 extern std::vector<Sommet<Ville>*> getAllCities(const Graphe<double, Ville>& graphe);
 
