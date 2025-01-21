@@ -12,8 +12,8 @@ int main(){
     int bestK = 1; 
 
     JSONLoader loader;
-    //auto graphe = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/GrandEst.json");
-    auto graphe = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Auvergne-Rhone-Alpes.json");
+    auto graphe = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/GrandEst.json");
+    //auto graphe = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Auvergne-Rhone-Alpes.json");
     //auto grapheBO = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Bourgogne-Franche-Comte.json");
     //auto grapheBR = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Bretagne.json");
     //auto grapheCE = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Centre-Val_de_Loire.json");
@@ -27,9 +27,9 @@ int main(){
     //auto graphePR = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Provence_Alpes_Cote_Azur.json");
 
     GrapheExporter::exporter(graphe, outputPathComplet);
-
-    for (int k = 1; k <= 7; k++) {
-        bestCmax = std::numeric_limits<double>::max();
+    int k =1;
+    //for (int k = 1; k <= 7; k++) {
+       // bestCmax = std::numeric_limits<double>::max();
 
         for (int run = 0; run < 3; run++) {
             auto clusters = KMeansPP(graphe, k);
@@ -47,14 +47,14 @@ int main(){
             }
         }
 
-        if (lastCmax - bestCmax < 300) {
-            std::cout << "Stop searching, because CMax < 300. \n";
-            break;
-        }
+        //if (lastCmax - bestCmax < 10000) {
+        //    std::cout << "Stop searching, because CMax < 300. \n";
+         //   break;
+      //  }
 
-        lastCmax = bestCmax;
-        bestK = k;
-    }
+        //lastCmax = bestCmax;
+        //bestK = k;
+    //}
 
     std::cout << "=== Cmax et Path ===\n";
     for (size_t i = 0; i < bestResults.size(); i++) {

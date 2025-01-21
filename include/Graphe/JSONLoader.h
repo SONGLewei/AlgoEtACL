@@ -14,19 +14,19 @@ using json = nlohmann::json;
 class JSONLoader {
 public:
     /**
-     * 从 JSON 文件加载图数据。
-     * @param fichier : JSON 文件路径
-     * @return 返回加载的图结构
-     */
+ * Charger les données du graphe à partir d'un fichier JSON.
+ * @param fichier : Le chemin du fichier JSON.
+ * @return        : Renvoie la structure du graphe chargée.
+ */
     Graphe<double, Ville> chargerGrapheFromJSON(const std::string& fichier);
 
     /**
-     * 计算两点之间的 Haversine 距离。
-     * @param lat1 : 第一个点的纬度
-     * @param lon1 : 第一个点的经度
-     * @param lat2 : 第二个点的纬度
-     * @param lon2 : 第二个点的经度
-     * @return 返回两点之间的距离（单位：公里）
-     */
+ * Calculer la distance de Haversine entre deux points.
+ * @param lat1 : Latitude du premier point.
+ * @param lon1 : Longitude du premier point.
+ * @param lat2 : Latitude du deuxième point.
+ * @param lon2 : Longitude du deuxième point.
+ * @return     : Renvoie la distance entre les deux points (en kilomètres).
+ */
     double haversineDistance(double lat1, double lon1, double lat2, double lon2);
 };

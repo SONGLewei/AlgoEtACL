@@ -12,7 +12,7 @@ int main(){
     int bestK = 1; 
 
     JSONLoader loader;
-    auto graphe = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/GrandEst.json");
+    auto graphe = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Auvergne-Rhone-Alpes.json");
     //Exporter graphe complet
     GrapheExporter::exporter(graphe, outputPathComplet);
 

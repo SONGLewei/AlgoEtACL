@@ -11,8 +11,8 @@ int main(){
     double bestCmax = std::numeric_limits<double>::max();
     int bestK = 1; 
     JSONLoader loader;
-    //auto graphe = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/GrandEst.json");
-    auto graphe = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Auvergne-Rhone-Alpes.json");
+    auto graphe = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/GrandEst.json");
+    //auto graphe = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Auvergne-Rhone-Alpes.json");
     //auto grapheBO = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Bourgogne-Franche-Comte.json");
     //auto grapheBR = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Bretagne.json");
     //auto grapheCE = loader.chargerGrapheFromJSON("D:/M1/Projet ALOG ACL/ProjetPartie3/Projet_Algo/13_fichiers_JSON/Centre-Val_de_Loire.json");
@@ -47,7 +47,7 @@ int main(){
         }
 
         if (lastCmax - bestCmax < 300) {
-            std::cout << "Stop searching, because CMax < 300. \n";
+            std::cout << "Stop searching, because CMax < 300. \n";//a cause de prix de revient(le cout de production)
             break;
         }
 

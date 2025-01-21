@@ -10,11 +10,14 @@
 #include "GrapheExporter.h"
 
 /**
- * 根据聚类结果和每个簇的贪心路径，在新图中仅创建必要的城市与边。
- * @param graphe   : 原图（包含所有城市以及城市间距离）
- * @param clusters : 每个簇中城市的 key 列表（如 KMeansPP 返回的结果）
- * @param results  : 对应每个簇的 (Cmax, 路径)；路径里是城市的字符串名字，顺序为贪心算法计算得到的顺序
- * @return         : 一个包含所有城市节点，但仅包含各簇路径上相邻城市的边的“新图”
+ * Crée un nouveau graphe contenant uniquement les villes et les arêtes nécessaires, 
+ * basé sur les résultats de clustering et les chemins de chaque cluster.
+ * @param graphe   : Le graphe original (contenant toutes les villes et les distances entre elles).
+ * @param clusters : Liste des clés des villes dans chaque cluster (par exemple, le résultat de KMeansPP).
+ * @param results  : Pour chaque cluster, une paire (Cmax, chemin), où le chemin est une liste de noms de villes 
+ *                   dans l'ordre calculé par les algorithme.
+ * @return         : Un "nouveau graphe" contenant tous les nœuds de ville mais seulement les arêtes 
+ *                   entre les villes adjacentes dans les chemins des clusters.
  */
 Graphe<double, Ville> buildNewGrapheWithPaths(
     const Graphe<double, Ville>& graphe,

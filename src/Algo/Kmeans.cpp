@@ -82,6 +82,7 @@ std::vector<int> kmeansPlusPlusInit(const Graphe<double, Ville>& graphe,
         }
 
         //按照 “D(x)^2 / sum(D(x)^2)” 的分布来随机选一个点做新中心
+        // Sélectionnez aléatoirement un point comme nouveau centre en fonction de la distribution de "D(x)^2 / sum(D(x)^2)"
         double sumD2 = 0.0;
         for (double d : minDistances) {
             sumD2 += (d * d);
@@ -131,7 +132,7 @@ std::vector<std::vector<int>> KMeansPP(const Graphe<double, Ville>& graphe, int 
         centerLons[i] = cities[centerIndices[i]]->v.longitude;
     }
 
-    std::vector<int> assignments(n, -1); //记录每个城市属于哪个簇
+    std::vector<int> assignments(n, -1); //记录每个城市属于哪个簇 Enregistrez à quel cluster appartient chaque ville
     bool changed = true;
     int maxIterations = 100;
 
@@ -158,6 +159,7 @@ std::vector<std::vector<int>> KMeansPP(const Graphe<double, Ville>& graphe, int 
         }
 
         //b) update step: Recalculez le centroïde de chaque cluster (si un cluster est vide, sélectionnez au hasard une nouvelle ville comme centroïde)
+        //Pour éviter qu'aucune ville ne se trouve dans une agglomération.
         //重新计算各簇的质心(若某簇为空，则随机挑一个新城市作为质心)
         std::vector<double> sumLat(k, 0.0);
         std::vector<double> sumLon(k, 0.0);

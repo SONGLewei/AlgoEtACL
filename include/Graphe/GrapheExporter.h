@@ -9,9 +9,9 @@
 class GrapheExporter {
 public:
     /**
-     * 导出图结构为 JSON 文件。
-     * @param graphe   : 要导出的图
-     * @param filename : 导出的 JSON 文件路径
-     */
+ * Exporter la structure du graphe en fichier JSON.
+ * @param graphe   : Le graphe à exporter.
+ * @param filename : Le chemin du fichier JSON exporté.
+ */
     static void exporter(const Graphe<double, Ville>& graphe, const std::string& filename);
 };

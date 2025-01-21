@@ -1,177 +1,186 @@
 {
   "noeuds": [
     {
-      "ville": "Bourg-en-Bresse",
-      "latitude": 46.21,
-      "longitude": 5.22
-    },
-    {
-      "ville": "Grenoble",
-      "latitude": 45.19,
-      "longitude": 5.74
-    },
-    {
-      "ville": "Vienne",
-      "latitude": 45.52,
-      "longitude": 4.88
-    },
-    {
-      "ville": "Montlimar",
-      "latitude": 44.56,
-      "longitude": 4.75
-    },
-    {
-      "ville": "Roanne",
-      "latitude": 46.03,
-      "longitude": 4.08
-    },
-    {
-      "ville": "Valence",
-      "latitude": 44.93,
-      "longitude": 4.89
-    },
-    {
-      "ville": "Annemasse",
-      "latitude": 46.19,
-      "longitude": 6.24
-    },
-    {
-      "ville": "Aurillac",
-      "latitude": 44.92,
-      "longitude": 2.44
-    },
-    {
-      "ville": "Aix-les-Bains",
-      "latitude": 45.69,
-      "longitude": 5.92
-    },
-    {
-      "ville": "Thonon-les-Bains",
-      "latitude": 46.37,
-      "longitude": 6.48
-    },
-    {
-      "ville": "Chambry",
-      "latitude": 45.56,
-      "longitude": 5.92
-    },
-    {
-      "ville": "Le Puy-en-Velay",
-      "latitude": 45.04,
-      "longitude": 3.89
-    },
-    {
-      "ville": "Villefranche-sur-Sane",
-      "latitude": 45.98,
+      "ville": "Charleville-Mzires",
+      "latitude": 49.77,
       "longitude": 4.72
     },
     {
-      "ville": "Albertville",
-      "latitude": 45.67,
-      "longitude": 6.39
+      "ville": "Chlons-en-Champagne",
+      "latitude": 48.96,
+      "longitude": 4.36
     },
     {
-      "ville": "Annecy",
-      "latitude": 45.9,
-      "longitude": 6.13
+      "ville": "Thionville",
+      "latitude": 49.36,
+      "longitude": 6.17
     },
     {
-      "ville": "Saint-tienne",
-      "latitude": 45.44,
-      "longitude": 4.39
+      "ville": "pinal",
+      "latitude": 48.18,
+      "longitude": 6.45
     },
     {
-      "ville": "Villeurbanne",
-      "latitude": 45.77,
-      "longitude": 4.88
+      "ville": "Haguenau",
+      "latitude": 48.82,
+      "longitude": 7.78
     },
     {
-      "ville": "Clermont-Ferrand",
-      "latitude": 45.78,
-      "longitude": 3.08
+      "ville": "Bar-le-Duc",
+      "latitude": 48.77,
+      "longitude": 5.16
     },
     {
-      "ville": "Lyon",
-      "latitude": 45.76,
-      "longitude": 4.84
+      "ville": "Sarrebourg",
+      "latitude": 48.73,
+      "longitude": 7.05
+    },
+    {
+      "ville": "Forbach",
+      "latitude": 49.19,
+      "longitude": 6.9
+    },
+    {
+      "ville": "Sarreguemines",
+      "latitude": 49.11,
+      "longitude": 7.07
+    },
+    {
+      "ville": "Saint-Di-des-Vosges",
+      "latitude": 48.28,
+      "longitude": 6.95
+    },
+    {
+      "ville": "Troyes",
+      "latitude": 48.3,
+      "longitude": 4.08
+    },
+    {
+      "ville": "Verdun",
+      "latitude": 49.16,
+      "longitude": 5.38
+    },
+    {
+      "ville": "Vesoul",
+      "latitude": 47.62,
+      "longitude": 6.15
+    },
+    {
+      "ville": "Briey",
+      "latitude": 49.25,
+      "longitude": 5.93
+    },
+    {
+      "ville": "Colmar",
+      "latitude": 48.08,
+      "longitude": 7.36
+    },
+    {
+      "ville": "Nancy",
+      "latitude": 48.69,
+      "longitude": 6.18
+    },
+    {
+      "ville": "Mulhouse",
+      "latitude": 47.75,
+      "longitude": 7.34
+    },
+    {
+      "ville": "Metz",
+      "latitude": 49.12,
+      "longitude": 6.17
+    },
+    {
+      "ville": "Reims",
+      "latitude": 49.26,
+      "longitude": 4.03
+    },
+    {
+      "ville": "Strasbourg",
+      "latitude": 48.58,
+      "longitude": 7.75
     }
   ],
   "aretes": [
     {
-      "de": "Thonon-les-Bains",
-      "vers": "Albertville"
+      "de": "Mulhouse",
+      "vers": "Vesoul"
     },
     {
-      "de": "Annemasse",
-      "vers": "Thonon-les-Bains"
+      "de": "Colmar",
+      "vers": "Mulhouse"
     },
     {
-      "de": "Annecy",
-      "vers": "Annemasse"
+      "de": "Strasbourg",
+      "vers": "Colmar"
     },
     {
-      "de": "Aix-les-Bains",
-      "vers": "Annecy"
+      "de": "Haguenau",
+      "vers": "Strasbourg"
     },
     {
-      "de": "Chambry",
-      "vers": "Aix-les-Bains"
+      "de": "Sarrebourg",
+      "vers": "Haguenau"
     },
     {
-      "de": "Grenoble",
-      "vers": "Chambry"
+      "de": "Saint-Di-des-Vosges",
+      "vers": "Sarrebourg"
     },
     {
-      "de": "Albertville",
-      "vers": "Grenoble"
+      "de": "pinal",
+      "vers": "Saint-Di-des-Vosges"
     },
     {
-      "de": "Clermont-Ferrand",
-      "vers": "Aurillac"
+      "de": "Vesoul",
+      "vers": "pinal"
     },
     {
-      "de": "Saint-tienne",
-      "vers": "Clermont-Ferrand"
+      "de": "Charleville-Mzires",
+      "vers": "Bar-le-Duc"
     },
     {
-      "de": "Valence",
-      "vers": "Saint-tienne"
+      "de": "Reims",
+      "vers": "Charleville-Mzires"
     },
     {
-      "de": "Montlimar",
-      "vers": "Valence"
+      "de": "Chlons-en-Champagne",
+      "vers": "Reims"
     },
     {
-      "de": "Le Puy-en-Velay",
-      "vers": "Montlimar"
+      "de": "Troyes",
+      "vers": "Chlons-en-Champagne"
     },
     {
-      "de": "Aurillac",
-      "vers": "Le Puy-en-Velay"
+      "de": "Bar-le-Duc",
+      "vers": "Troyes"
     },
     {
-      "de": "Roanne",
-      "vers": "Villefranche-sur-Sane"
+      "de": "Sarreguemines",
+      "vers": "Forbach"
     },
     {
-      "de": "Vienne",
-      "vers": "Roanne"
+      "de": "Nancy",
+      "vers": "Sarreguemines"
     },
     {
-      "de": "Lyon",
-      "vers": "Vienne"
+      "de": "Verdun",
+      "vers": "Nancy"
     },
     {
-      "de": "Villeurbanne",
-      "vers": "Lyon"
+      "de": "Briey",
+      "vers": "Verdun"
     },
     {
-      "de": "Bourg-en-Bresse",
-      "vers": "Villeurbanne"
+      "de": "Thionville",
+      "vers": "Briey"
     },
     {
-      "de": "Villefranche-sur-Sane",
-      "vers": "Bourg-en-Bresse"
+      "de": "Metz",
+      "vers": "Thionville"
+    },
+    {
+      "de": "Forbach",
+      "vers": "Metz"
     }
   ]
 }
